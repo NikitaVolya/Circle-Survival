@@ -13,6 +13,8 @@ const game = {
     canvas: null,
     ctx: null,
 
+    isWork: false,
+
     lastTime: 0,
     deltaTime: 0,
 
@@ -58,11 +60,14 @@ const game = {
         this.mouseClick = false;
     },
     GameLoop(timestamp) {
+        console.log(timestamp);
+
         this.deltaTime = timestamp - this.lastTime;
         this.lastTime = timestamp;
 
         this.GameDraw();
-        this.GameUpdate();
+        if (this.isWork)
+            this.GameUpdate();
 
         requestAnimationFrame(t => { this.GameLoop(t)});
     },
@@ -100,13 +105,23 @@ const game = {
 
     Start() {
 
+        this.isWork = true;
+
         game.canvas = document.getElementById('canvas');
         if (!canvas.getContext)
             return;
 
         game.ctx = game.canvas.getContext('2d');
         requestAnimationFrame(() => game.GameLoop(0));
-    }
+    },
+
+    Continue() {
+        this.isWork = true;
+    },
+
+    Pause() {
+        this.isWork = false;
+    },
 }
 
 
@@ -114,4 +129,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         game.Init();
         game.Start();
+
+        document.getElementById('pauseBtn').addEventListener('click', () => {
+            game.Pause();
+        });
+        document.getElementById('continueBtn').addEventListener('click', () => {
+            game.Continue();
+        });
 });
