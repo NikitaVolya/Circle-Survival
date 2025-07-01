@@ -22,6 +22,12 @@ const game = {
         this.toDelete.push(entity);
     },
 
+    AddEntity(entity) {
+        if (this.entities.indexOf(entity) != -1)
+            return;
+        this.entities.push(entity);
+    },
+
     GameDraw() {
         this.canvas.width = window.innerWidth - 4;
         this.canvas.height = window.innerHeight - 4;
@@ -75,6 +81,11 @@ const game = {
 
         window.addEventListener('mousedown', e => {
             this.mouseClick = true;
+            game.keys['mouseclick'] = true;
+        });
+
+        window.addEventListener('mouseup', e => {
+            game.keys['mouseclick'] = false;
         });
 
         this.mousePosition = Vector(0, 0);

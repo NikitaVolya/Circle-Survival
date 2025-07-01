@@ -45,13 +45,13 @@ function createProgressionController() {
             let progressionLineSize = this.experience / this.levelCost;
 
             game.ctx.beginPath();
-            game.ctx.rect(1, 1, window.innerWidth * progressionLineSize - 1, 15);
+            game.ctx.rect(1, 2, window.innerWidth * progressionLineSize - 1, 15);
             game.ctx.fillStyle = 'yellow';
             game.ctx.fill();
 
             game.ctx.beginPath();
-            game.ctx.rect(1, 1, window.innerWidth * progressionLineSize - 1, 15);
-            game.ctx.rect(2, 1, window.innerWidth - 6, 15);
+            game.ctx.rect(1, 2, window.innerWidth * progressionLineSize - 1, 15);
+            game.ctx.rect(2, 2, window.innerWidth - 6, 15);
             game.ctx.stroke();
 
             

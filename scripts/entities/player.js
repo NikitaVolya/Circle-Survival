@@ -44,11 +44,21 @@ function createPlayer() {
 
     entity.progressionController = createProgressionController();
 
+    entity.weapons = [
+        createGun(),
+        createExplosion(),
+    ];
+
     entity.LogicUpdate = (game) => {
         
         PlayerMovment(entity, game);
         PlayerRotation(entity, game);
-        Action(entity, game);
+        
+        for (let i in entity.weapons)
+        {
+            const weapon = entity.weapons[i];
+            weapon.Update(game, entity);
+        }
     }
 
 
