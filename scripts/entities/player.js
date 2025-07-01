@@ -42,6 +42,8 @@ function createPlayer() {
     entity.name = 'player';
     entity.SetMaxHeals(10);
 
+    entity.progressionController = createProgressionController();
+
     entity.LogicUpdate = (game) => {
         
         PlayerMovment(entity, game);

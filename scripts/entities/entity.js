@@ -12,7 +12,14 @@ function createEntity() {
         object.heals = number;
     }
 
-    
+    object.WhenDie = (game) => {
+        
+    };
+
+    object.Die = (game) => {
+        object.WhenDie(game);
+        game.Kill(object);
+    }
 
     object.Update = (game) => {
         object.LogicUpdate(game);
@@ -20,7 +27,7 @@ function createEntity() {
 
         if (object.heals <= 0)
         {
-            game.Kill(object);
+            object.Die(game);
             return;
         }
     };

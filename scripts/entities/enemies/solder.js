@@ -54,6 +54,10 @@ function createSolder(game) {
         }
     }
 
+    entity.WhenDie = (game) => {
+        game.entities.push(createCoin(entity.body.position, 3));
+    }
+
     entity.LogicUpdate = (game) => {
 
         solderMove();

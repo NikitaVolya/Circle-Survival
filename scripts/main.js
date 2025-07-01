@@ -33,6 +33,8 @@ const game = {
             const entity = this.entities[i];
             entity.Draw(this);
         }
+
+        this.player.progressionController.DrawExperienceBar(this);
     },
     GameUpdate() {
 

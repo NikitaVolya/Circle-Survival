@@ -12,6 +12,10 @@ function createZombie(game) {
     const playerPosition = game.player.body.position;
     const selfPosition = entity.body.position;
 
+    entity.WhenDie = (game) => {
+        game.entities.push(createCoin(entity.body.position));
+    }
+
     entity.body.OnCollision = (game, otherEntity) => {
         if (otherEntity != game.player)
             return;

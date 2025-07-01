@@ -22,11 +22,18 @@ function createProjectile(filter, position, direction) {
         
         if (!object.filter(entity))
             return;
+
+        switch (entity.name)
+        {
+            case 'projectile':
+                game.Kill(entity);
+                break;
+            case 'coin':
+                return;
+            default:
+                entity.heals -= 1;
+        }
         
-        if (entity.name != 'projectile')
-            entity.heals -= 1;
-        else 
-            game.Kill(entity);
         game.Kill(object);
     }
 
