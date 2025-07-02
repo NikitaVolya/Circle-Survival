@@ -1,7 +1,7 @@
 
 
 function createEntity() {
-    let object = createObject();
+    let object = ObjectsBuilder.CreateObject();
 
     object.heals = 1;
     object.maxHeals = 1;
@@ -10,10 +10,10 @@ function createEntity() {
     object.effects = [];
     object.effectsToDelete = [];
 
-    object.AddEffect = (game, effect) => {
+    object.AddEffect = (effect) => {
         if (object.effects.find(ef => ef.name == effect.name))
             return;
-        effect.Init(game, object);
+        effect.Init(object);
         object.effects.push(effect);
     };
 
@@ -23,17 +23,17 @@ function createEntity() {
         object.effectsToDelete.push(effect);
     }
 
-    object.UpdateEffects = (game) => {
+    object.UpdateEffects = () => {
 
         for (let i in object.effects)
         {
             let effect = object.effects[i];
-            effect.Update(game, object);
+            effect.Update(object);
         }
         for (let i in object.effectsToDelete) 
         {
             let effect = object.effectsToDelete[i];
-            effect.WhenDelete(game, object);
+            effect.WhenDelete(object);
         }   
 
         object.effects = object.effects.filter(ef => object.effectsToDelete.indexOf(ef) == -1);
@@ -48,34 +48,31 @@ function createEntity() {
         object.heals = number;
     }
 
-    object.WhenDie = (game) => {
+    object.TakeDamage = (number) => {
         
-    };
-
-    object.TakeDamage = (game, number) => {
         object.heals -= number;
-        object.AddEffect(game, EffectsBuilder.createDamageVisualEffect());
+        object.AddEffect(EffectsBuilder.createDamageVisualEffect());
     }
 
-    object.Die = (game) => {
-        object.WhenDie(game);
-        game.Kill(object);
+    object.Die = () => {
+        object.WhenDie();
+        Game.entities.Remove(object);
     }
 
     object.Update = (game) => {
 
-        object.LogicUpdate(game);
-        object.body.Update(game);
-        object.UpdateEffects(game);
+        object.LogicUpdate();
+        object.body.Update();
+        object.UpdateEffects();
 
         if (object.heals <= 0)
         {
-            object.Die(game);
+            object.Die();
             return;
         }
     };
 
-    object.DrawHealsBar = (game) => {
+    object.DrawHealsBar = () => {
         if (object.heals == object.maxHeals)
             return;
         
@@ -85,22 +82,22 @@ function createEntity() {
         let barsize = object.body.size * 2;
         let livesProc = Math.max(object.heals, 0) / object.maxHeals
 
-        game.ctx.beginPath();
-        game.ctx.rect(barPos.x, barPos.y, barsize * livesProc, 10);
-        game.ctx.fill();
+        Game.ctx.beginPath();
+        Game.ctx.rect(barPos.x, barPos.y, barsize * livesProc, 10);
+        Game.ctx.fill();
 
-        game.ctx.beginPath();
-        game.ctx.rect(barPos.x, barPos.y, barsize * livesProc + 1, 10);
-        game.ctx.rect(barPos.x, barPos.y, barsize, 10);
-        game.ctx.stroke();
+        Game.ctx.beginPath();
+        Game.ctx.rect(barPos.x, barPos.y, barsize * livesProc + 1, 10);
+        Game.ctx.rect(barPos.x, barPos.y, barsize, 10);
+        Game.ctx.stroke();
     }
 
-    object.Draw = (game) => {
+    object.Draw = () => {
         
-        game.ctx.beginPath();
-        game.ctx.arc(object.body.position.x, object.body.position.y, object.body.size, 0, 2 * Math.PI);
-        game.ctx.fillStyle = object.color;
-        game.ctx.fill();
+        Game.ctx.beginPath();
+        Game.ctx.arc(object.body.position.x, object.body.position.y, object.body.size, 0, 2 * Math.PI);
+        Game.ctx.fillStyle = object.color;
+        Game.ctx.fill();
 
         let rotationPoint = object.body.rotation.Copy();
         rotationPoint.Multiply(object.body.size);
@@ -116,13 +113,13 @@ function createEntity() {
             slide.Multiply(object.body.size);
             fistPosition.AddVector(slide);
 
-            game.ctx.beginPath();
-            game.ctx.arc(fistPosition.x, fistPosition.y, object.body.size / 2.5, 0, 2 * Math.PI);
-            game.ctx.fillStyle = object.color;
-            game.ctx.fill();
+            Game.ctx.beginPath();
+            Game.ctx.arc(fistPosition.x, fistPosition.y, object.body.size / 2.5, 0, 2 * Math.PI);
+            Game.ctx.fillStyle = object.color;
+            Game.ctx.fill();
         }
 
-        object.DrawHealsBar(game);
+        object.DrawHealsBar();
     }
 
     return object;

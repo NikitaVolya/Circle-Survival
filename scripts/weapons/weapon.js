@@ -8,15 +8,15 @@ function createWeapon() {
         cooldown: 0,
         nextActivate: 0,
 
-        Activate(game, player) {
+        Activate(player) {
 
         },
 
-        Update(game, player) {
-            if (game.keys[this.keyBind] && this.nextActivate <= game.lastTime)
+        Update(player) {
+            if (Game.keys[this.keyBind] && this.nextActivate <= Game.lastTime)
             {
-                this.Activate(game, player);
-                this.nextActivate = game.lastTime + this.cooldown;
+                this.Activate(player);
+                this.nextActivate = Game.lastTime + this.cooldown;
             }
         }
     }

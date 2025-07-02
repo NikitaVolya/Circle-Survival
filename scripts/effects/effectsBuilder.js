@@ -6,13 +6,13 @@ const EffectsBuilder = {
     CreateEmptyEffect() {
         return {
             name: 'none',
-            Init(game, entity) {
+            Init(entity) {
 
             },
-            Update(game, entity) {
+            Update(entity) {
 
             },
-            WhenDelete(game, entity) {
+            WhenDelete(entity) {
 
             }
         };
@@ -26,18 +26,18 @@ const EffectsBuilder = {
         effect.liveTime = 10;
         effect.damageColor = 'red';
 
-        effect.Init = (game, entity) => {
+        effect.Init = (entity) => {
             effect.entityBaseColor = entity.color;
             entity.color = effect.damageColor;
-            effect.liveTime = game.lastTime + 50; 
+            effect.liveTime = Game.lastTime + 50; 
         }
 
-        effect.Update = (game, entity) => {
-            if (effect.liveTime <= game.lastTime)
+        effect.Update = (entity) => {
+            if (effect.liveTime <= Game.lastTime)
                 entity.DeleteEffect(effect);
         }
 
-        effect.WhenDelete = (game, entity) => {
+        effect.WhenDelete = (entity) => {
             entity.color = effect.entityBaseColor;
         }
         

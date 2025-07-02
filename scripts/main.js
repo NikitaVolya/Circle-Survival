@@ -3,9 +3,7 @@ const Game = {
 
     player: null,
 
-    entities: [ ],
-    toDelete: [ ],
-    objectsSpawner: null,
+    entities: null,
 
     keys: {},
     mousePosition: null,
@@ -18,18 +16,6 @@ const Game = {
 
     lastTime: 0,
     deltaTime: 0,
-
-    Kill(entity) {
-        if (this.toDelete.indexOf(entity) != -1)
-            return;
-        this.toDelete.push(entity);
-    },
-
-    AddEntity(entity) {
-        if (this.entities.indexOf(entity) != -1)
-            return;
-        this.entities.push(entity);
-    },
 
     DrawWeaponsCooldown() {
         
@@ -70,27 +56,16 @@ const Game = {
 
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-        for (let i in this.entities)
-        {
-            const entity = this.entities[i];
-            entity.Draw(this);
-        }
+        this.entities.DrawAll();
 
         this.player.progressionController.DrawExperienceBar(this);
         this.DrawWeaponsCooldown();
     },
     GameUpdate() {
 
-        this.entities = this.entities.filter((e) => this.toDelete.indexOf(e) == -1);
-        this.toDelete = [];
+        this.entities.UpdateAll();
 
-        for (let i in this.entities)
-        {
-            const entity = this.entities[i];
-            entity.Update(this);
-        }
-
-        this.objectsSpawner.Update(this);
+        ObjectsSpawner.Update();
 
         this.mouseClick = false;
     },
@@ -127,15 +102,15 @@ const Game = {
             this.keys['mouseclick'] = false;
         });
 
+        this.entities = CreateObjectsContainer();
+
         this.mousePosition = Vector(0, 0);
 
         this.player = createPlayer();
         this.player.body.position.x = window.innerWidth / 2;
         this.player.body.position.y = window.innerHeight / 2;
 
-        this.entities.push(this.player);
-
-        this.objectsSpawner = createObjectsSpawner();
+        this.entities.Add(this.player);
 
     },
 

@@ -1,7 +1,7 @@
 
 
 
-function createSolder(game) {
+function createSolder() {
 
     let entity = createEntity();
 
@@ -10,13 +10,13 @@ function createSolder(game) {
     entity.distanceToPlayer = 300;
 
     entity.fireCooldown = 1400;
-    entity.nextFire = game.lastTime + entity.fireCooldown;
+    entity.nextFire = Game.lastTime + entity.fireCooldown;
 
-    const playerPosition = game.player.body.position;
+    const playerPosition = Game.player.body.position;
     const selfPosition = entity.body.position;
 
 
-    function solderMove() {
+    entity.SolderMove = () => {
         let vectorToPlayer = selfPosition.GetVectorTo(playerPosition);
 
         if (vectorToPlayer.Length() < 10)
@@ -36,32 +36,32 @@ function createSolder(game) {
         entity.body.AddVelocity(direction);
     }
 
-    function fireUpdate() {
-        if (entity.nextFire < game.lastTime)
+    entity.FireUpdate = () => {
+        if (entity.nextFire < Game.lastTime)
         {
             let direction = selfPosition.GetDirectionTo(playerPosition);
             
-            let newProjectile = createProjectile((e) => e == game.player, selfPosition.Copy(), direction);
+            let newProjectile = createProjectile((e) => e == Game.player, selfPosition.Copy(), direction);
             newProjectile.speed = 0.05;
             newProjectile.body.size = 10;
             newProjectile.color = 'red';
 
             newProjectile.SetLiveTime(5000);
 
-            game.entities.push(newProjectile);
+            Game.entities.Add(newProjectile);
 
-            entity.nextFire = game.lastTime + entity.fireCooldown * (0.6 + Math.random());
+            entity.nextFire = Game.lastTime + entity.fireCooldown * (0.6 + Math.random());
         }
     }
 
-    entity.WhenDie = (game) => {
-        game.entities.push(createCoin(entity.body.position, 3));
+    entity.WhenDie = () => {
+        Game.entities.Add(createCoin(entity.body.position, 3));
     }
 
-    entity.LogicUpdate = (game) => {
+    entity.LogicUpdate = () => {
 
-        solderMove();
-        fireUpdate();
+        entity.SolderMove();
+        entity.FireUpdate();
     }
 
     return entity;

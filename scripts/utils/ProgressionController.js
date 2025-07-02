@@ -1,6 +1,6 @@
 
 function createCoin(position, experience = 1) {
-    let object = createObject();
+    let object = ObjectsBuilder.CreateObject();
 
     object.name = 'coin';
     object.experience = experience;
@@ -9,11 +9,11 @@ function createCoin(position, experience = 1) {
     object.body.size = 7;
     object.body.positionAbsolut = true;
 
-    object.body.OnCollision = (game, entity) => {
-        if (game.player != entity)
+    object.body.OnCollision = (entity) => {
+        if (Game.player != entity)
             return;
         entity.progressionController.AddExperience(object.experience);
-        game.Kill(object);
+        Game.entities.Remove(object);
     }
 
     const selfPosition = object.body.position;
@@ -40,24 +40,24 @@ function createProgressionController() {
         experience: 0,
         levelCost: 10,
 
-        DrawExperienceBar(game) {
+        DrawExperienceBar() {
 
             let progressionLineSize = this.experience / this.levelCost;
 
-            game.ctx.beginPath();
-            game.ctx.rect(1, 2, window.innerWidth * progressionLineSize - 1, 15);
-            game.ctx.fillStyle = 'yellow';
-            game.ctx.fill();
+            Game.ctx.beginPath();
+            Game.ctx.rect(1, 2, window.innerWidth * progressionLineSize - 1, 15);
+            Game.ctx.fillStyle = 'yellow';
+            Game.ctx.fill();
 
-            game.ctx.beginPath();
-            game.ctx.rect(1, 2, window.innerWidth * progressionLineSize - 1, 15);
-            game.ctx.rect(2, 2, window.innerWidth - 6, 15);
-            game.ctx.stroke();
+            Game.ctx.beginPath();
+            Game.ctx.rect(1, 2, window.innerWidth * progressionLineSize - 1, 15);
+            Game.ctx.rect(2, 2, window.innerWidth - 6, 15);
+            Game.ctx.stroke();
 
             
-            game.ctx.fillStyle = 'black';
-            game.ctx.font = "30px Arial";
-            game.ctx.fillText("Level: " + this.level,10,45);
+            Game.ctx.fillStyle = 'black';
+            Game.ctx.font = "30px Arial";
+            Game.ctx.fillText("Level: " + this.level,10,45);
 
         },
 
@@ -65,14 +65,14 @@ function createProgressionController() {
             return 10 + (level / 3) * (level / 3) + level / 10;
         },
 
-        Update(game) {
+        Update() {
             if (this.experience >= this.levelCost)
             {
                 this.experience -= this.levelCost;
                 this.level += 1;
                 this.levelCost = this.CalculateLevelCost(this.level);
                 
-                UpgradesController.UpgradeDialog(game);
+                UpgradesController.UpgradeDialog(Game);
             }
         },
 

@@ -12,27 +12,24 @@ function createBody(position, size) {
             this.velocity.AddVector(vector);
         },
 
-        Move(game) {
+        Move() {
 
             let deltaPosition = this.velocity.Copy();
-            deltaPosition.Multiply(game.deltaTime);
+            deltaPosition.Multiply(Game.deltaTime);
 
             this.position.AddVector(deltaPosition);
             this.velocity.Multiply(0.80);
+        },
 
+        OnCollision(object) {
 
         },
 
-        OnCollision(game, object) {
-
-        },
-
-        Collision(game) {
-            for (let i in game.entities)
-            {
-                const entity = game.entities[i];
+        Collision() {
+            Game.entities.ForEach((entity) => {
+                
                 if (entity.body === this)
-                    continue;
+                    return;
                     
                 let deltaVector = this.position.GetVectorTo(entity.body.position);
 
@@ -47,15 +44,16 @@ function createBody(position, size) {
                         this.AddVelocity(deltaVector);
                     }
                     
-                    this.OnCollision(game, entity);
+                    this.OnCollision(entity);
                 }
-            }
+            });
+            
             
         },
 
-        Update(game) {
-            this.Collision(game);
-            this.Move(game);
+        Update() {
+            this.Collision();
+            this.Move();
         }
     }
 };

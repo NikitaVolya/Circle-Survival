@@ -1,14 +1,18 @@
 
-function PlayerMovment(player, game) {
+const Player = {
+    
+}
+
+function PlayerMovment(player) {
     const moveVector = Vector(0, 0);
     
-    if (game.keys[87])
+    if (Game.keys[87])
         moveVector.Add(0, -1);
-    if (game.keys[83])
+    if (Game.keys[83])
         moveVector.Add(0, 1);
-    if (game.keys[65])
+    if (Game.keys[65])
         moveVector.Add(-1, 0);
-    if (game.keys[68])
+    if (Game.keys[68])
         moveVector.Add(1, 0);
     
     moveVector.Normalize();
@@ -17,9 +21,9 @@ function PlayerMovment(player, game) {
     player.body.AddVelocity(moveVector);
 }
 
-function PlayerRotation(player, game) {
+function PlayerRotation(player) {
 
-    let direction = player.body.position.GetDirectionTo(game.mousePosition);
+    let direction = player.body.position.GetDirectionTo(Game.mousePosition);
 
     player.body.rotation = direction;
 }
@@ -28,6 +32,7 @@ function PlayerRotation(player, game) {
 function createPlayer() {
 
     let entity = createEntity();
+
     entity.name = 'player';
     entity.SetMaxHeals(10);
 
@@ -48,19 +53,19 @@ function createPlayer() {
     }
 
 
-    entity.LogicUpdate = (game) => {
+    entity.LogicUpdate = () => {
         
-        PlayerMovment(entity, game);
-        PlayerRotation(entity, game);
-        entity.progressionController.Update(game);
+        PlayerMovment(entity);
+        PlayerRotation(entity);
+        
+        entity.progressionController.Update();
         
         for (let i in entity.weapons)
         {
             const weapon = entity.weapons[i];
-            weapon.Update(game, entity);
+            weapon.Update(entity);
         }
     }
-
 
     return entity;
 }

@@ -12,7 +12,7 @@ function createGunWeapon() {
     weapon.bulletSpeed = 0.2;
 
 
-    weapon.Activate = (game, player) => {
+    weapon.Activate = (player) => {
         let position = player.body.position.Copy();
         let direction = player.body.rotation.Copy();
 
@@ -21,8 +21,7 @@ function createGunWeapon() {
         newProjectile.speed = weapon.bulletSpeed;
         newProjectile.body.size = weapon.bulletSize;
 
-        
-        game.AddEntity(newProjectile);
+        Game.entities.Add(newProjectile);
     }
 
     return weapon;

@@ -2,7 +2,7 @@
 
 function createProjectile(filter, position, direction) {
     
-    let object = createObject();
+    let object = ObjectsBuilder.CreateObject();
 
     object.name = 'projectile';
     object.speed = 0.2;
@@ -18,7 +18,7 @@ function createProjectile(filter, position, direction) {
         object.deadTime = game.lastTime + number;
     }
 
-    object.body.OnCollision = (game, entity) => {
+    object.body.OnCollision = (entity) => {
         
         if (!object.filter(entity))
             return;
@@ -26,29 +26,27 @@ function createProjectile(filter, position, direction) {
         switch (entity.name)
         {
             case 'projectile':
-                game.Kill(entity);
+                Game.entities.Remove(entity);
                 break;
-            case 'coin':
-                break;
-            case 'entity':
-                entity.heals -= 1;
-                entity.AddEffect(game, EffectsBuilder.createDamageVisualEffect());
+            case 'entity': case 'player':
+                entity.TakeDamage(1);
+                entity.AddEffect(EffectsBuilder.createDamageVisualEffect());
                 break;
         }
         
-        game.Kill(object);
+        Game.entities.Remove(object);
     }
 
-    object.LogicUpdate = (game) => {
+    object.LogicUpdate = () => {
 
         let impulse = direction.Copy();
         impulse.Multiply(object.speed);
 
         object.body.AddVelocity(impulse);
 
-        if (object.deadTime <= game.lastTime)
+        if (object.deadTime <= Game.lastTime)
         {
-            game.Kill(object);
+            Game.Kill(object);
         }
     }
 

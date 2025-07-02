@@ -14,9 +14,9 @@ function createExplosionWeapon() {
     weapon.ExplosionSpeed = 200;
     weapon.ExplosionDemage = 4;
 
-    weapon.Activate = (game, player) => {
+    weapon.Activate = (player) => {
 
-        let object = createObject();
+        let object = ObjectsBuilder.CreateObject();
 
         let position = player.body.position.Copy();
 
@@ -27,27 +27,23 @@ function createExplosionWeapon() {
         object.body.positionAbsolut = true;
         object.body.size = 1;
 
-        object.body.OnCollision = (game, entity) => {
-
-            if (entity == game.player || entity.name != 'entity')
+        object.body.OnCollision = (entity) => {
+            if (entity == Game.player || entity.name != 'entity')
                 return;
-            entity.TakeDamage(game, weapon.ExplosionDemage * game.deltaTime / weapon.ExplosionSpeed);
+            entity.TakeDamage(weapon.ExplosionDemage * Game.deltaTime / weapon.ExplosionSpeed);
         }
 
-        object.LogicUpdate = (game) => {
-
+        object.LogicUpdate = () => {
             
-            iteration += game.deltaTime / weapon.ExplosionSpeed;
+            iteration += Game.deltaTime / weapon.ExplosionSpeed;
 
             object.body.size = Math.max(Math.sin(iteration * Math.PI) * weapon.ExplosionSize, 0);
 
             if (iteration >= 1)
-            {
-                game.Kill(object);
-            }
+                Game.entities.Remove(object);
         }
         
-        game.AddEntity(object);
+        Game.entities.Add(object);
     }
 
     return weapon;
