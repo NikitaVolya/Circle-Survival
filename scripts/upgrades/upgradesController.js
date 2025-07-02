@@ -7,7 +7,9 @@ const UpgradesController = {
         UpgradesBuilder.createHealtRecoverUpgrade(),
         UpgradesBuilder.createBombUpgrade(),
         UpgradesBuilder.createBombSizeUpgrade(),
-        UpgradesBuilder.createBombDamageUpgrade()
+        UpgradesBuilder.createBombDamageUpgrade(),
+        UpgradesBuilder.createSatelliteUpgrade(),
+        UpgradesBuilder.createGunDamageUpgrade(),
     ],
 
     DeleteUpgrade(upgrade) {

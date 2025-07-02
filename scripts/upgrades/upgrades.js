@@ -106,5 +106,32 @@ const UpgradesBuilder = {
             Game.player.GetWeapon('bomb').ExplosionSize *= 1.1;
         }
         return upgrade;
+    },
+
+    createSatelliteUpgrade() {
+        let upgrade = this.createEmptyUpgrade();
+
+        upgrade.name = 'Satellite weapon';
+        upgrade.description = 'Adds a new weapon that passively creates satellites to the player\'s injection';
+        upgrade.rarity = Rarities.Epic;
+        upgrade.useNumber = 1;
+
+        upgrade.Use = () => {
+            Game.player.weapons.push(createSatelliteWeapon());
+        }
+        return upgrade;
+    },
+
+    createGunDamageUpgrade() {
+        let upgrade = this.createEmptyUpgrade();
+
+        upgrade.name = 'Gun damage Upgrade';
+        upgrade.description = 'Increases gun damage by 5%.';
+        upgrade.rarity = Rarities.Common;
+
+        upgrade.Use = () => {
+            Game.player.GetWeapon('gun').bulletDamage *= 1.05;
+        }
+        return upgrade;
     }
 }   

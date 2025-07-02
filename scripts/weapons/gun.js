@@ -10,6 +10,7 @@ function createGunWeapon() {
 
     weapon.bulletSize = 5;
     weapon.bulletSpeed = 0.2;
+    weapon.bulletDamage = 1;
 
 
     weapon.Activate = (player) => {
@@ -20,6 +21,7 @@ function createGunWeapon() {
 
         newProjectile.speed = weapon.bulletSpeed;
         newProjectile.body.size = weapon.bulletSize;
+        newProjectile.damage = weapon.bulletDamage;
 
         Game.entities.Add(newProjectile);
     }
