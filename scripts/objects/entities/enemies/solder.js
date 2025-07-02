@@ -41,7 +41,7 @@ function createSolder() {
         {
             let direction = selfPosition.GetDirectionTo(playerPosition);
             
-            let newProjectile = createProjectile((e) => e == Game.player, selfPosition.Copy(), direction);
+            let newProjectile = createBullet((e) => e == Game.player, selfPosition.Copy(), direction);
             newProjectile.speed = 0.05;
             newProjectile.body.size = 10;
             newProjectile.color = 'red';

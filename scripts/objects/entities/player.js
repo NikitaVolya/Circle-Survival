@@ -42,6 +42,10 @@ function createPlayer() {
         createGunWeapon()
     ];
 
+    entity.WhenDie = () => {
+        Game.Pause();
+    }
+
     entity.GetWeapon = (name) => {
         for (let i in Game.player.weapons)
         {

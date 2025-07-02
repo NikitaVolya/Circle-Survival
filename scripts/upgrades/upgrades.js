@@ -66,7 +66,7 @@ const UpgradesBuilder = {
         upgrade.useNumber = 1;
 
         upgrade.Use = () => {
-            Game.player.weapons.push(createExplosionWeapon());
+            Game.player.weapons.push(createBombWeapon());
         }
         return upgrade;
     },

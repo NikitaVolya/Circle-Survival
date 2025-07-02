@@ -1,6 +1,6 @@
 
 
-function createProjectile(filter, position, direction) {
+function createBullet(filter, position, direction) {
     
     let object = ObjectsBuilder.CreateObject();
 
