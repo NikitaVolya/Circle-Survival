@@ -38,10 +38,10 @@ function createPlayer() {
     ];
 
     entity.GetWeapon = (name) => {
-        for (let i in game.player.weapons)
+        for (let i in Game.player.weapons)
         {
-            const weapon = game.player.weapons[i];
-            if (weapon.name == 'bomb')
+            const weapon = Game.player.weapons[i];
+            if (weapon.name == name)
                 return weapon;
         }
         return null;

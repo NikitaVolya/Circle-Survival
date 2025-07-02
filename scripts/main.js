@@ -1,8 +1,7 @@
 
-const game = {
+const Game = {
 
     player: null,
-    upgradesController: null,
 
     entities: [ ],
     toDelete: [ ],
@@ -40,24 +39,24 @@ const game = {
         {
             const weapon = this.player.weapons[i];
 
-            const nextUse = Math.max(weapon.nextActivate - game.lastTime, 0);
-                const procent = nextUse / weapon.cooldown;
+            const nextUse = Math.max(weapon.nextActivate - this.lastTime, 0);
+            const procent = nextUse / weapon.cooldown;
 
-            game.ctx.beginPath();
-            game.ctx.rect(slide, window.innerHeight - 10, 13, -30 + 30 * procent);
-            game.ctx.fillStyle = 'rgb(0, 195, 255)';
-            game.ctx.fill();
+            this.ctx.beginPath();
+            this.ctx.rect(slide, window.innerHeight - 10, 13, -30 + 30 * procent);
+            this.ctx.fillStyle = 'rgb(0, 195, 255)';
+            this.ctx.fill();
 
             
-            game.ctx.beginPath();
-            game.ctx.rect(slide, window.innerHeight - 10, 13, -30);
-            game.ctx.stroke();
+            this.ctx.beginPath();
+            this.ctx.rect(slide, window.innerHeight - 10, 13, -30);
+            this.ctx.stroke();
 
             const text = weapon.name + ' | ' + weapon.displayKey;
             
-            game.ctx.fillStyle = 'black';
-            game.ctx.font = "35px Arial";
-            game.ctx.fillText(text, slide + 20, window.innerHeight - 15);
+            this.ctx.fillStyle = 'black';
+            this.ctx.font = "35px Arial";
+            this.ctx.fillText(text, slide + 20, window.innerHeight - 15);
             
 
             slide += text.length * 22;
@@ -78,7 +77,7 @@ const game = {
         }
 
         this.player.progressionController.DrawExperienceBar(this);
-        this.DrawWeaponsCooldown(this);
+        this.DrawWeaponsCooldown();
     },
     GameUpdate() {
 
@@ -104,16 +103,15 @@ const game = {
         if (this.isWork)
             this.GameUpdate();
         
-
         requestAnimationFrame(t => { this.GameLoop(t)});
     },
 
     Init() {
         window.addEventListener('keydown', (e) => {
-            game.keys[e.keyCode] = true;
+            this.keys[e.keyCode] = true;
         }); 
         window.addEventListener('keyup', (e) => {
-            game.keys[e.keyCode] = false;
+            this.keys[e.keyCode] = false;
         });
 
         window.addEventListener("mousemove", e => {
@@ -122,11 +120,11 @@ const game = {
 
         window.addEventListener('mousedown', e => {
             this.mouseClick = true;
-            game.keys['mouseclick'] = true;
+            this.keys['mouseclick'] = true;
         });
 
         window.addEventListener('mouseup', e => {
-            game.keys['mouseclick'] = false;
+            this.keys['mouseclick'] = false;
         });
 
         this.mousePosition = Vector(0, 0);
@@ -134,8 +132,6 @@ const game = {
         this.player = createPlayer();
         this.player.body.position.x = window.innerWidth / 2;
         this.player.body.position.y = window.innerHeight / 2;
-
-        this.upgradesController = createUpgradesController();
 
         this.entities.push(this.player);
 
@@ -147,9 +143,9 @@ const game = {
 
         this.isWork = true;
 
-        game.canvas = document.getElementById('game');
-        game.ctx = game.canvas.getContext('2d');
-        requestAnimationFrame(() => game.GameLoop(0));
+        this.canvas = document.getElementById('game');
+        this.ctx = this.canvas.getContext('2d');
+        requestAnimationFrame(() => this.GameLoop(0));
 
     },
 
@@ -170,13 +166,13 @@ const game = {
 
 document.addEventListener('DOMContentLoaded', () => {
 
-        game.Init();
-        game.Start();
+        Game.Init();
+        Game.Start();
 
         document.getElementById('pauseBtn').addEventListener('click', () => {
-            game.Pause();
+            Game.Pause();
         });
         document.getElementById('continueBtn').addEventListener('click', () => {
-            game.Continue();
+            Game.Continue();
         });
 });

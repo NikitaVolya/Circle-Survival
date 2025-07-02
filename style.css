@@ -47,6 +47,9 @@ canvas {
     width: 33.33%;
     padding: 5px;
     border: 1px double black;
+    display: flex;
+    flex-direction: column;
+    justify-content:space-between;
 }
 
 #upgradesContainer :hover {

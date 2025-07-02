@@ -17,9 +17,9 @@ function createCoin(position, experience = 1) {
     }
 
     const selfPosition = object.body.position;
-    const playerPosition = game.player.body.position;
+    const playerPosition = Game.player.body.position;
 
-    object.LogicUpdate = (game) => {
+    object.LogicUpdate = () => {
 
         let distance = playerPosition.GetDistance(selfPosition);
         if (distance < 200)
@@ -72,7 +72,7 @@ function createProgressionController() {
                 this.level += 1;
                 this.levelCost = this.CalculateLevelCost(this.level);
                 
-                game.upgradesController.UpgradeDialog(game);
+                UpgradesController.UpgradeDialog(game);
             }
         },
 
