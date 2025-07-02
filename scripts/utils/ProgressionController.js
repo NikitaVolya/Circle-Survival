@@ -65,21 +65,20 @@ function createProgressionController() {
             return 10 + level * level / 2;
         },
 
-        UpdateLevel() {
+        Update(game) {
             if (this.experience >= this.levelCost)
             {
                 this.experience -= this.levelCost;
                 this.level += 1;
                 this.levelCost = this.CalculateLevelCost(this.level);
-
-                this.UpdateLevel();
+                
+                game.upgradesController.UpgradeDialog(game);
             }
         },
 
         AddExperience(number) {
 
             this.experience += number;
-            this.UpdateLevel();
         }
     }
 }

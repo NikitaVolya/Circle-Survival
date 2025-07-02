@@ -7,6 +7,10 @@ function createEntity() {
     object.maxHeals = 1;
     object.name = 'entity';
 
+    object.AddHeals = (number) => {
+        object.heals = Math.min(object.heals + number, object.maxHeals);
+    }
+
     object.SetMaxHeals = (number) => {
         object.maxHeals = number;
         object.heals = number;

@@ -1,15 +1,18 @@
 
 
-function createExplosion() {
+function createExplosionWeapon() {
 
     let weapon = createWeapon();
+
+    weapon.name = 'bomb';
+    weapon.displayKey = 'f';
 
     weapon.keyBind = 70;
     weapon.cooldown = 5000;
 
-    weapon.ExplosionSize = 250;
+    weapon.ExplosionSize = 200;
     weapon.ExplosionSpeed = 200;
-    weapon.ExplosionDemage = 6;
+    weapon.ExplosionDemage = 4;
 
     weapon.Activate = (game, player) => {
 

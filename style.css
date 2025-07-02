@@ -1,5 +1,64 @@
-
 body {
     margin: 0;
+    overflow: hidden;
 }
 
+canvas {
+    display: block;
+    width: 100vw;
+    height: 100vh;
+}
+
+#UI {
+    position: absolute;
+    z-index: 10;
+    top: 0;
+    left: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+}
+
+#upgradeWindow {
+
+    text-align: center;
+
+    background-color: white;
+
+    border-radius: 20px;
+
+    width: 50%;
+    padding: 20px 30px;
+}
+
+#upgradesContainer {
+    width: 100%;
+
+    display: flex;
+    gap: 20px;
+}
+
+.upgrade {
+    width: 33.33%;
+    padding: 5px;
+    border: 1px double black;
+}
+
+#upgradesContainer :hover {
+    background-color: aliceblue;
+}
+
+.upgrade h2 {
+    color: white;
+    font-size: 2rem;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
+.upgrade > p {
+    padding: 10px;
+}

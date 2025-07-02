@@ -1,8 +1,10 @@
 
-function createGun() {
+function createGunWeapon() {
 
     let weapon = createWeapon();
 
+    weapon.name = 'gun';
+    weapon.displayKey = 'm1 '
     weapon.keyBind = 'mouseclick';
     weapon.cooldown = 400;
 
