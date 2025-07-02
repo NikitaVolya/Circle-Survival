@@ -11,7 +11,7 @@ function createRarity(name, chance)
 const Rarities = {
     Common: createRarity('common', 0.75),
     Epic: createRarity('epic', 0.5),
-    Legendary: createRarity('legendary', 0.5)
+    Legendary: createRarity('legendary', 0.35)
 }
 
 function createUpgrade() {
@@ -76,9 +76,9 @@ function createBombSizeUpgrade() {
     let upgrade = createUpgrade();
 
     upgrade.name = 'Bomb size Upgrade';
-    upgrade.description = '';
+    upgrade.description = 'Increase in the bomb blast radius by 5%';
     upgrade.rarity = Rarities.Epic;
-    upgrade.useNumber = 10;
+    upgrade.useNumber = 5;
 
     upgrade.Condition = (game) => {
         return game.player.GetWeapon('bomb') != null;
@@ -94,7 +94,7 @@ function createBombDamageUpgrade() {
     let upgrade = createUpgrade();
 
     upgrade.name = 'Bomb damage Upgrade';
-    upgrade.description = '';
+    upgrade.description = 'Increases bomb damage by 10%.';
     upgrade.rarity = Rarities.Epic;
     upgrade.useNumber = 8;
 

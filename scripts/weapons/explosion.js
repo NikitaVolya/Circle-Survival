@@ -10,7 +10,7 @@ function createExplosionWeapon() {
     weapon.keyBind = 70;
     weapon.cooldown = 5000;
 
-    weapon.ExplosionSize = 200;
+    weapon.ExplosionSize = 180;
     weapon.ExplosionSpeed = 200;
     weapon.ExplosionDemage = 4;
 
@@ -29,14 +29,9 @@ function createExplosionWeapon() {
 
         object.body.OnCollision = (game, entity) => {
 
-            if (entity == game.player)
+            if (entity == game.player && entity.name != 'entity')
                 return;
-
-            switch (entity.name) {
-                case 'entity':
-                    entity.heals -= weapon.ExplosionDemage* game.deltaTime / weapon.ExplosionSpeed ;
-                    break;
-            }
+            entity.heals -= weapon.ExplosionDemage * game.deltaTime / weapon.ExplosionSpeed ;
         }
 
         object.LogicUpdate = (game) => {

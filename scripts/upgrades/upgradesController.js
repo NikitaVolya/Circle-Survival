@@ -74,10 +74,18 @@ function createUpgradesController() {
             const upgradesContainer = document.getElementById('upgradesContainer');
 
             upgradesContainer.innerHTML = '';
+
+            let chosed = [];
             
-            for (let i = 0; i < 3; i++) 
-            {
-                const upgrade = this.GetRandomUpgrade();
+            for (let i = 0; i < Math.min(3, this.upgrades.length); i++) 
+            {   
+                let upgrade;
+                do{
+                    upgrade = this.GetRandomUpgrade();
+                } while (chosed.find(u => u.name == upgrade.name));
+                chosed.push(upgrade);
+
+
                 const cart = this.GetUpgradeCart(upgrade);
 
                 cart.addEventListener('click', () => { this.ChoseUpgrade(upgrade, game);});
