@@ -7,6 +7,38 @@ function createEntity() {
     object.maxHeals = 1;
     object.name = 'entity';
 
+    object.effects = [];
+    object.effectsToDelete = [];
+
+    object.AddEffect = (game, effect) => {
+        if (object.effects.find(ef => ef.name == effect.name))
+            return;
+        effect.Init(game, object);
+        object.effects.push(effect);
+    };
+
+    object.DeleteEffect = (effect) => {
+        if (object.effectsToDelete.indexOf(effect) != -1)
+            return;
+        object.effectsToDelete.push(effect);
+    }
+
+    object.UpdateEffects = (game) => {
+
+        for (let i in object.effects)
+        {
+            let effect = object.effects[i];
+            effect.Update(game, object);
+        }
+        for (let i in object.effectsToDelete) 
+        {
+            let effect = object.effectsToDelete[i];
+            effect.WhenDelete(game, object);
+        }   
+
+        object.effects = object.effects.filter(ef => object.effectsToDelete.indexOf(ef) == -1);
+    }
+
     object.AddHeals = (number) => {
         object.heals = Math.min(object.heals + number, object.maxHeals);
     }
@@ -20,14 +52,21 @@ function createEntity() {
         
     };
 
+    object.TakeDamage = (game, number) => {
+        object.heals -= number;
+        object.AddEffect(game, EffectsBuilder.createDamageVisualEffect());
+    }
+
     object.Die = (game) => {
         object.WhenDie(game);
         game.Kill(object);
     }
 
     object.Update = (game) => {
+
         object.LogicUpdate(game);
         object.body.Update(game);
+        object.UpdateEffects(game);
 
         if (object.heals <= 0)
         {

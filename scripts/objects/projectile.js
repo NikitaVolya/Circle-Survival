@@ -29,9 +29,11 @@ function createProjectile(filter, position, direction) {
                 game.Kill(entity);
                 break;
             case 'coin':
-                return;
-            default:
+                break;
+            case 'entity':
                 entity.heals -= 1;
+                entity.AddEffect(game, EffectsBuilder.createDamageVisualEffect());
+                break;
         }
         
         game.Kill(object);

@@ -29,9 +29,9 @@ function createExplosionWeapon() {
 
         object.body.OnCollision = (game, entity) => {
 
-            if (entity == game.player && entity.name != 'entity')
+            if (entity == game.player || entity.name != 'entity')
                 return;
-            entity.heals -= weapon.ExplosionDemage * game.deltaTime / weapon.ExplosionSpeed ;
+            entity.TakeDamage(game, weapon.ExplosionDemage * game.deltaTime / weapon.ExplosionSpeed);
         }
 
         object.LogicUpdate = (game) => {

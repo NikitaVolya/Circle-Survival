@@ -24,17 +24,6 @@ function PlayerRotation(player, game) {
     player.body.rotation = direction;
 }
 
-function Action(player, game) {
-    if (game.mouseClick)
-    {
-        let position = player.body.position.Copy();
-        let direction = player.body.rotation.Copy();
-
-        let newProjectile = createProjectile((e) => e != player, position, direction);
-        
-        game.entities.push(newProjectile);
-    }
-}
 
 function createPlayer() {
 
