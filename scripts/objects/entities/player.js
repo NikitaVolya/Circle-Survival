@@ -39,7 +39,7 @@ function createPlayer() {
     entity.progressionController = createProgressionController();
 
     entity.weapons = [
-        createGunWeapon()
+        createGunWeapon(),
     ];
 
     entity.WhenDie = () => {

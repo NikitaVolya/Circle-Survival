@@ -62,7 +62,7 @@ function createProgressionController() {
         },
 
         CalculateLevelCost(level) {
-            return 10 + (level / 3) * (level / 3) + level / 10;
+            return 10 + (level / 3) * (level / 2.5) + level / 10;
         },
 
         Update() {

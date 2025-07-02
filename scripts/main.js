@@ -102,6 +102,8 @@ const Game = {
             this.keys['mouseclick'] = false;
         });
 
+        this.keys['passive'] = true;
+
         this.entities = CreateObjectsContainer();
 
         this.mousePosition = Vector(0, 0);
