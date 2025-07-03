@@ -42,7 +42,7 @@ const Game = {
     },
 
     ToMainMenu() {
-        window.location.href = '/index.html';
+        window.location.href = 'index.html';
     },
 
     DrawWeaponsCooldown() {
