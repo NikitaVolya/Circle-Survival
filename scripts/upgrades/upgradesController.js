@@ -54,11 +54,11 @@ const UpgradesController = {
 
     },
 
-    ChoseUpgrade(upgrade, game) {
+    ChoseUpgrade(upgrade) {
 
         const upgradeWindow = document.getElementById('upgradeWindow');
 
-        upgrade.Use(game);
+        upgrade.Use();
 
         if (upgrade.useNumber)
             upgrade.useNumber--;
@@ -67,10 +67,10 @@ const UpgradesController = {
             this.DeleteUpgrade(upgrade);
 
         Game.HideWindow(upgradeWindow);
-        game.Continue();
+        Game.Continue();
     },
 
-    UpgradeDialog(game) {
+    UpgradeDialog() {
 
         const upgradeWindow = document.getElementById('upgradeWindow');
         const upgradesContainer = document.getElementById('upgradesContainer');
@@ -90,12 +90,12 @@ const UpgradesController = {
 
             const cart = this.GetUpgradeCart(upgrade);
 
-            cart.addEventListener('click', () => { this.ChoseUpgrade(upgrade, game);});
+            cart.addEventListener('click', () => { this.ChoseUpgrade(upgrade);});
 
             upgradesContainer.appendChild(cart);
         }
 
-        game.Pause();
+        Game.Pause();
         Game.ShowWindow(upgradeWindow);
     }
 }

@@ -31,6 +31,10 @@ const Game = {
         element.classList.add('hidden');
     },
 
+    Restart() {
+        window.location.reload();
+    },
+
     DrawWeaponsCooldown() {
         
         let slide = 10;
