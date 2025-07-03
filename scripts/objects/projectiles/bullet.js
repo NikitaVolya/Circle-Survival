@@ -8,7 +8,7 @@ function createBullet(owner, filter, position, direction) {
     object.owner = owner;
     object.speed = 0.2;
     object.filter = filter;
-    object.deadTime = game.lastTime + 1000;
+    object.deadTime = Game.lastTime + 800;
 
     object.body.speed = 1;
     object.body.size = 5;

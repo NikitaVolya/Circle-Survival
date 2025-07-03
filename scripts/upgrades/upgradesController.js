@@ -10,6 +10,9 @@ const UpgradesController = {
         UpgradesBuilder.createBombDamageUpgrade(),
         UpgradesBuilder.createSatelliteUpgrade(),
         UpgradesBuilder.createGunDamageUpgrade(),
+        UpgradesBuilder.createSatelliteNumberUpgrade(),
+        UpgradesBuilder.createWeaponsSpeedUpgrade(),
+        UpgradesBuilder.createLegendaryWeaponsSpeedUpgrade(),
     ],
 
     DeleteUpgrade(upgrade) {
@@ -21,7 +24,9 @@ const UpgradesController = {
             for (let i in this.rarities)
             {
                 const rarity = this.rarities[i];
-                if (Math.random() > rarity.chance)
+                let randomNumber = Math.random();
+                
+                if (randomNumber > rarity.chance)
                     continue;
                 
                 let upgrades = this.upgrades.filter(u => u.rarity == rarity);

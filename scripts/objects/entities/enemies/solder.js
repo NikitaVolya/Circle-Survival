@@ -46,7 +46,7 @@ function createSolder() {
             newProjectile.body.size = 10;
             newProjectile.color = 'red';
 
-            newProjectile.SetLiveTime(5000);
+            newProjectile.SetLiveTime(3000);
 
             Game.entities.Add(newProjectile);
 

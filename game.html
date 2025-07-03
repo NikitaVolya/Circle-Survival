@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Circle survival</title>
+
+    <script src="scripts/utils/vector.js"></script>
+    <script src="scripts/utils/ProgressionController.js"></script>
+    <script src="scripts/utils/objectsContainer.js"></script>
+
+    <script src="scripts/objects/body.js"></script>
+    <script src="scripts/objects/object.js"></script>
+    <script src="scripts/objects/timer.js"></script>
+
+    <script src="scripts/objects/projectiles/bullet.js"></script>
+    <script src="scripts/objects/projectiles/explosion.js"></script>
+
+    <script src="scripts/objects/entities/entity.js"></script>
+    <script src="scripts/objects/entities/player.js"></script>
+    <script src="scripts/objects/entities/enemies/zombie.js"></script>
+    <script src="scripts/objects/entities/enemies/solder.js"></script>
+
+    <script src="scripts/weapons/weapon.js"></script>
+    <script src="scripts/weapons/gun.js"></script>
+    <script src="scripts/weapons/bomb.js"></script>
+    <script src="scripts/weapons/satelliteWeapon.js"></script>
+
+    <script src="scripts/effects/effectsBuilder.js"></script>
+
+    <script src="scripts/upgrades/upgrades.js"></script>
+    <script src="scripts/upgrades/upgradesController.js"></script>
+    
+    <script src="scripts/objectsSpawner.js"></script>
+    <script src="scripts/game.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+
+    
+</head>
+<body>
+    
+    <div style="position: relative;">
+        <canvas id="game"></canvas>
+
+        <div id="UI">
+            
+            <div id="upgradeWindow" class="UIwindow hidden">
+                <h1>Choose an upgrade</h1>
+                <p>With each level you get, you will be given new upgrades. Rarer upgrades will also appear over time.</p>
+                <div id="upgradesContainer">
+                    <div class="upgrade">
+                        <h2>Upgrade</h2>
+                        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
+                    </div>
+                    <div class="upgrade">
+                        <h2>Extra bullet size</h2>
+                        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
+                    </div>
+                    <div class="upgrade">
+                        <h2>Upgrade</h2>
+                        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="gameOverWindow" class="UIwindow hidden">
+                <h1>Game over!</h1>
+                <div class="row">
+                    <button class="button-30" onclick="Game.ToMainMenu()">Main menu</button>
+                    <button class="button-30" onclick="Game.Restart()">Restart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

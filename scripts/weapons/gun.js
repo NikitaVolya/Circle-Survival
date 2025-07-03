@@ -19,6 +19,8 @@ function createGunWeapon() {
 
         let newProjectile = createBullet(player, (e) => e != player, position, direction);
 
+        newProjectile.SetLiveTime(1200);
+
         newProjectile.speed = weapon.bulletSpeed;
         newProjectile.body.size = weapon.bulletSize;
         newProjectile.damage = weapon.bulletDamage;

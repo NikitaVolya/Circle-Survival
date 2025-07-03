@@ -65,11 +65,29 @@ function createProgressionController() {
             return 10 + (level / 3) * (level / 2.5) + level / 10;
         },
 
+        CheckLevelProgression(){
+            switch (this.level)
+            {
+                case 5:
+                    Rarities.Epic.chance = 0.4;
+                    Rarities.Legendary.chance = 0.05;
+                    break;
+                case 20: 
+                    Rarities.Rare.chance = 0.6;
+                    Rarities.Epic.chance = 0.35;
+                    Rarities.Legendary.chance = 0.1;
+                case 30:
+                    Rarities.Epic.chance = 0.6;
+                    Rarities.Legendary.chance = 0.4;
+            }
+        },
+
         Update() {
             if (this.experience >= this.levelCost)
             {
                 this.experience -= this.levelCost;
                 this.level += 1;
+                this.CheckLevelProgression();
                 this.levelCost = this.CalculateLevelCost(this.level);
                 
                 UpgradesController.UpgradeDialog(Game);
