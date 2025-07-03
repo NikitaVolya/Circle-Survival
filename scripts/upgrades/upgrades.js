@@ -9,7 +9,7 @@ function createRarity(name, chance)
 
 const Rarities = {
     Common: createRarity('common', 0.75),
-    Epic: createRarity('rare', 0.60),
+    Rare: createRarity('rare', 0.60),
     Epic: createRarity('epic', 0.45),
     Legendary: createRarity('legendary', 0.50)
 }
@@ -63,7 +63,7 @@ const UpgradesBuilder = {
 
         upgrade.name = 'Bomb Weapon';
         upgrade.description = 'Adds a new weapon that creates an explosion to the player\'s injection and only damages enemies.\nTo use the weapon, press f';
-        upgrade.rarity = Rarities.Common;
+        upgrade.rarity = Rarities.Rare;
         upgrade.useNumber = 1;
 
         upgrade.Use = () => {
@@ -114,7 +114,7 @@ const UpgradesBuilder = {
 
         upgrade.name = 'Satellite weapon';
         upgrade.description = 'Adds a new weapon that passively creates satellites to the player\'s injection';
-        upgrade.rarity = Rarities.Epic;
+        upgrade.rarity = Rarities.Rare;
         upgrade.useNumber = 1;
 
         upgrade.Use = () => {

@@ -17,6 +17,20 @@ const Game = {
     lastTime: 0,
     deltaTime: 0,
 
+    ShowGameOverWindow() {
+        const window = document.getElementById('gameOverWindow');
+        this.ShowWindow(window);
+    },
+
+    ShowWindow(element) {
+        element.classList.remove('hidden');
+        element.classList.add('visible');
+    },
+    HideWindow(element) {
+        element.classList.remove('visible');
+        element.classList.add('hidden');
+    },
+
     DrawWeaponsCooldown() {
         
         let slide = 10;

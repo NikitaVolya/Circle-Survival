@@ -1,7 +1,7 @@
 
 const UpgradesController = {
     
-    rarities: [Rarities.Common, Rarities.Epic, Rarities.Legendary],
+    rarities: [Rarities.Common, Rarities.Rare, Rarities.Epic, Rarities.Legendary],
     upgrades: [
         UpgradesBuilder.createHealthUpgrade(),
         UpgradesBuilder.createHealtRecoverUpgrade(),
@@ -42,7 +42,6 @@ const UpgradesController = {
 
         const cart = document.createElement('div');
         cart.classList.add('upgrade');
-        console.log(upgrade.rarity);
         cart.classList.add(upgrade.rarity.name);
 
         cart.innerHTML = `
@@ -67,7 +66,7 @@ const UpgradesController = {
         if (upgrade.useNumber != null && upgrade.useNumber <= 0)
             this.DeleteUpgrade(upgrade);
 
-        upgradeWindow.style.display = 'none';
+        Game.HideWindow(upgradeWindow);
         game.Continue();
     },
 
@@ -97,6 +96,6 @@ const UpgradesController = {
         }
 
         game.Pause();
-        upgradeWindow.style.display = 'block';
+        Game.ShowWindow(upgradeWindow);
     }
 }

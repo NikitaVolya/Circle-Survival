@@ -44,6 +44,7 @@ function createPlayer() {
 
     entity.WhenDie = () => {
         Game.Pause();
+        Game.ShowGameOverWindow();
     }
 
     entity.GetWeapon = (name) => {

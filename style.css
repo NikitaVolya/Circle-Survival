@@ -15,6 +15,7 @@ canvas {
     gap: 20px;
 }
 
+
 h1 {
   --color-one: hsl(210 80% 50%);
   --color-two: hsl(320 100% 75%);
@@ -24,6 +25,21 @@ h1 {
   text-transform: uppercase;
   display: grid;
   line-height: 1;
+}
+
+.hidden {
+    opacity: 0;
+    transform: translateY(100px);
+    pointer-events: none;
+    visibility: hidden;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+    visibility: visible;
 }
 
 p {
@@ -51,6 +67,16 @@ p {
 }
 
 .UIwindow {
+    
+    position: absolute;
+    z-index: 10;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
     text-align: center;
     background-color: #f9f9f9;
     border-radius: 16px;
@@ -59,6 +85,8 @@ p {
     padding: 30px 20px;
     gap: 10px;
     font-family: 'Poppins', sans-serif;
+    
+    transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
 #upgradesContainer {
@@ -131,7 +159,6 @@ p {
   color: #36395A;
   cursor: pointer;
   display: inline-flex;
-  font-family: "JetBrains Mono",monospace;
   height: 48px;
   justify-content: center;
   line-height: 1;
@@ -142,6 +169,7 @@ p {
   position: relative;
   text-align: left;
   text-decoration: none;
+  font-family: 'Poppins', sans-serif;
   transition: box-shadow .15s,transform .15s;
   user-select: none;
   -webkit-user-select: none;
