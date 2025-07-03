@@ -42,6 +42,8 @@ const UpgradesController = {
 
         const cart = document.createElement('div');
         cart.classList.add('upgrade');
+        console.log(upgrade.rarity);
+        cart.classList.add(upgrade.rarity.name);
 
         cart.innerHTML = `
             <h2>${upgrade.name}</h2>

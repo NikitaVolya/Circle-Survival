@@ -9,8 +9,9 @@ function createRarity(name, chance)
 
 const Rarities = {
     Common: createRarity('common', 0.75),
-    Epic: createRarity('epic', 0.5),
-    Legendary: createRarity('legendary', 0.35)
+    Epic: createRarity('rare', 0.60),
+    Epic: createRarity('epic', 0.45),
+    Legendary: createRarity('legendary', 0.50)
 }
 
 const UpgradesBuilder = {
