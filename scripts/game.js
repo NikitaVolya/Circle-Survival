@@ -25,6 +25,8 @@ const Game = {
 
     ShowGameOverWindow() {
         const window = document.getElementById('gameOverWindow');
+        const pauseBtn = document.getElementById('pauseButton');
+        this.HideWindow(pauseBtn);
         this.ShowWindow(window);
     },
 
@@ -130,6 +132,23 @@ const Game = {
         window.addEventListener('mouseup', e => {
             this.keys['mouseclick'] = false;
         });
+
+        
+        const pauseBtn = document.getElementById('pauseButton');
+
+        pauseBtn.addEventListener('click', e => {
+            if (this.isWork)
+            {
+                this.Pause();
+                pauseBtn.classList.remove('pause');
+                pauseBtn.classList.add('resume');
+            }
+            else {
+                this.Continue();
+                pauseBtn.classList.remove('resume');
+                pauseBtn.classList.add('pause');
+            }
+        })
 
         this.keys['passive'] = true;
 
