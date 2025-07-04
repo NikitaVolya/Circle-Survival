@@ -7,6 +7,10 @@ document.addEventListener('DOMContentLoaded', () => {
         window.location.href = 'game.html';
     });
 
+    document.getElementById('upgradesGalleryBtn').addEventListener('click', e => {
+        window.location.href = 'upgradesGallery.html';
+    });
+
     const recordScoreText = document.getElementById('playerHighscore');
     let record = localStorage.getItem('record');
 

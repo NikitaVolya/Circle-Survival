@@ -2,6 +2,7 @@ body {
     margin: 0;
     overflow: hidden;
 
+    background-image: url('src/backgorund.avif');
 }
 
 #game {
@@ -359,4 +360,72 @@ p {
 
 .pause-button:hover {
     background-color: rgba(0, 0, 0, 0.75);
+}
+
+header {
+    padding: 20px 30px;
+    background: #ffffff;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    gap: 20px;
+}
+
+.title {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.filters {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+
+ select {
+    padding: 8px 14px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    transition: border 0.2s ease;
+}
+
+select:focus {
+    outline: none;
+    border-color: #2979ff;
+    box-shadow: 0 0 0 3px rgba(41,121,255,0.15);
+}
+
+
+button.back-btn {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+button.back-btn:hover {
+    background-color: #e0e0e0;
+    transform: translateY(-1px);
+}
+
+button.back-btn:active {
+    transform: translateY(1px);
+    background-color: #dcdcdc;
+}
+
+.gallery {
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 20px;
 }
