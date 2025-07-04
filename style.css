@@ -24,7 +24,7 @@ h1 {
   font-family: 'Poppins', sans-serif;
   text-transform: uppercase;
   display: grid;
-  line-height: 1;
+  margin-bottom: 0;
 }
 
 p {
@@ -62,13 +62,15 @@ p {
     visibility: hidden;
     pointer-events: none;
 
+    display: flex;
+    flex-direction: column;
     text-align: center;
     background-color: #f9f9f9;
     border-radius: 16px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
     width: min(90vw, 700px);
     padding: 30px 20px;
-    gap: 10px;
+    gap: 20px;
     font-family: 'Poppins', sans-serif;
     
     transition: opacity 0.4s ease, transform 0.4s ease;
@@ -246,7 +248,7 @@ p {
     transition: background-color 0.2s ease;
 }
 
-.pause-button::before {
+.pause-button.pause::before {
     content: "";
     display: block;
     width: 14px;
@@ -254,6 +256,16 @@ p {
     background: 
         linear-gradient(to right, white 40%, transparent 40%, transparent 60%, white 60%);
     background-size: 100% 100%;
+}
+
+.pause-button.resume::before {
+    content: "";
+    display: block;
+    width: 0;
+    height: 0;
+    border-left: 14px solid white;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
 }
 
 .pause-button:hover {

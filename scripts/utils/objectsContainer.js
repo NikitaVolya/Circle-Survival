@@ -8,20 +8,21 @@ function CreateObjectsContainer() {
             for (let i in this.elements)
             {
                 const element = this.elements[i];
-                if (updateFunction)
+                if (updateFunction != null)
                     updateFunction(element);
                 else
-                 element.Update();
+                    element.Update();
             }
-
-            for (let i in this.toRemove)
-            {
-                const element = this.toRemove[i];
-                if (whenDieFunction)
+            
+            this.toRemove.forEach(element => {
+                if (whenDieFunction != null)
+                {
                     whenDieFunction(element);
-                else
+                }
+                else {
                     element.WhenDie();
-            }
+                }
+            });
 
             this.elements = this.elements.filter(el => !this.toRemove.includes(el));
             this.toRemove = [];

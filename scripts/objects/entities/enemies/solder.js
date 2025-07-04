@@ -56,6 +56,7 @@ function createSolder() {
 
     entity.WhenDie = () => {
         Game.entities.Add(createCoin(entity.body.position, 3));
+        Game.score += 2;
     }
 
     entity.LogicUpdate = () => {

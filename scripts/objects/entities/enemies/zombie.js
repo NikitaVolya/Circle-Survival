@@ -14,6 +14,7 @@ function createZombie(game) {
 
     entity.WhenDie = () => {
         Game.entities.Add(createCoin(entity.body.position));
+        Game.score++;
     }
 
     entity.body.OnCollision = (otherEntity) => {

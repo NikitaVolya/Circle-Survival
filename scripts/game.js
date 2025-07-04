@@ -15,6 +15,8 @@ const Game = {
         this.timers.Add(TimerBuilder.CreateTimer(f, time));
     },
 
+    score: 0,
+
     canvas: null,
     ctx: null,
 
@@ -27,7 +29,24 @@ const Game = {
     ShowGameOverWindow() {
         const window = document.getElementById('gameOverWindow');
         const pauseBtn = document.getElementById('pauseButton');
-        
+        const resultScore = document.getElementById('resultScore');
+        const bestScore = document.getElementById('bestScore');
+
+        let userRecord = localStorage.getItem('record');
+
+        resultScore.innerText = Game.score;
+        if (!userRecord || Game.score > userRecord)
+        {
+            userRecord = Game.score;
+            bestScore.innerText = Game.score + ' new record!!!';
+        }
+        else {
+            bestScore.innerText = userRecord;
+        }
+
+        localStorage.setItem('record', userRecord);
+
+
         this.blockPause = true;
 
         this.HideWindow(pauseBtn);
@@ -81,6 +100,13 @@ const Game = {
         });
     },
 
+    DrawScore() {
+
+        this.ctx.fillStyle = 'orange';
+        this.ctx.font = "20px Arial";
+        this.ctx.fillText('Score: ' + this.score, 10, 70);
+    },
+
     GameDraw() {
         this.canvas.width = window.innerWidth - 4;
         this.canvas.height = window.innerHeight - 4;
@@ -89,8 +115,9 @@ const Game = {
 
         this.entities.DrawAll();
 
-        this.player.progressionController.DrawExperienceBar(this);
+        this.player.progressionController.DrawExperienceBar();
         this.DrawWeaponsCooldown();
+        this.DrawScore();
     },
     GameUpdate() {
 

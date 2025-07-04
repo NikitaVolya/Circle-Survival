@@ -36,7 +36,6 @@ function createEntity() {
     }
 
     object.Die = () => {
-        object.WhenDie();
         Game.entities.Remove(object);
     }
 

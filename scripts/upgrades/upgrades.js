@@ -167,7 +167,6 @@ const UpgradesBuilder = {
             Game.player.effects.Add(
                 EffectsBuilder.CreateReloadWeaponEffect( (w) => {
                         w.nextActivate -= 100;
-                        console.log('epic');
                     })
             );
         }
@@ -189,7 +188,6 @@ const UpgradesBuilder = {
             Game.player.effects.Add(
                 EffectsBuilder.CreateReloadWeaponEffect( (w) => {
                         w.nextActivate *= 0.7;
-                        console.log('legendary');
                     })
             );
 
