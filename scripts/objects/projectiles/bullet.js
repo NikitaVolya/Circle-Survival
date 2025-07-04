@@ -8,7 +8,7 @@ function createBullet(owner, filter, position, direction) {
     object.owner = owner;
     object.speed = 0.2;
     object.filter = filter;
-    object.deadTime = Game.lastTime + 800;
+    object.liveTime = 1000;
 
     object.body.speed = 1;
     object.body.size = 5;
@@ -18,7 +18,7 @@ function createBullet(owner, filter, position, direction) {
     object.body.positionAbsolut = true;
 
     object.SetLiveTime = (number) => {
-        object.deadTime = Game.lastTime + number;
+        object.liveTime =  number;
     }
 
     object.body.OnCollision = (entity) => {
@@ -53,10 +53,11 @@ function createBullet(owner, filter, position, direction) {
 
         object.MoveUpdate();
 
-        if (object.deadTime <= Game.lastTime)
+        if (object.liveTime <= 0)
         {
             Game.entities.Remove(object);
         }
+        object.liveTime -= Game.deltaTime;
     }
 
     return object;

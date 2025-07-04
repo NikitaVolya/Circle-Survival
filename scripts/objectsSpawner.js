@@ -3,7 +3,7 @@
 const ObjectsSpawner = {
         
     timeCooldown: 1500,
-    spawnNumber: 0.85,
+    spawnNumber: 1,
     nextSpawn: 0,
 
     units: [[0.15, createSolder], [0.75, createZombie]],
@@ -43,20 +43,20 @@ const ObjectsSpawner = {
 
     Update() {
 
-        if (this.nextSpawn <= Game.lastTime)
+        if (this.nextSpawn <= 0)
         {
-            for (let i = 0; i < this.spawnNumber; i += 1)
+            for (let i = 0; i < Math.floor(this.spawnNumber); i += 1)
             {
                 let entity = this.RandomEntityGenerate()();
                 this.DeployRandomOutScreen(entity);
                 
                 Game.entities.Add(entity);
-
-                this.nextSpawn = Game.lastTime + this.timeCooldown;
             }
-            this.spawnNumber = this.spawnNumber + 0.001;
+            this.nextSpawn = this.timeCooldown;
             this.timeCooldown -= 0.2;
+            this.spawnNumber += 0.01;
         }
+        this.nextSpawn -= Game.deltaTime;
     },
 
     Init() {

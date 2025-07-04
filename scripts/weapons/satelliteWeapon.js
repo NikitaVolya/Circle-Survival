@@ -6,9 +6,9 @@ function createSatelliteWeapon() {
     weapon.name = 'satellite';
     weapon.displayKey = ''
     weapon.keyBind = 'passive';
-    weapon.cooldown = 8000;
+    weapon.cooldown = 10000;
 
-    weapon.satelliteSpeed = 1.2;
+    weapon.satelliteSpeed = 2;
     weapon.satellitesNumber = 1;
 
 
@@ -20,7 +20,7 @@ function createSatelliteWeapon() {
         {
             let newProjectile = createBullet(player, (e) => e != player, position, direction);
 
-            newProjectile.SetLiveTime(2000);
+            newProjectile.SetLiveTime(9000);
             newProjectile.body.size = 10;
             newProjectile.owner = player;
 
@@ -39,7 +39,7 @@ function createSatelliteWeapon() {
                 newProjectile.iterator += newProjectile.speed;
             }
 
-            Game.AddDelay(() => Game.entities.Add(newProjectile), i * 500);
+            Game.AddDelay(() => Game.entities.Add(newProjectile), i * 300);
         }
 
         

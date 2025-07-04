@@ -53,7 +53,7 @@ const Game = {
         {
             const weapon = this.player.weapons[i];
 
-            const nextUse = Math.max(weapon.nextActivate - this.lastTime, 0);
+            const nextUse = Math.max(weapon.nextActivate, 0);
             const procent = nextUse / weapon.cooldown;
 
             this.ctx.beginPath();

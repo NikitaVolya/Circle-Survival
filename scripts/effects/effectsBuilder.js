@@ -5,12 +5,24 @@ const EffectsBuilder = {
 
     CreateEmptyEffect() {
         return {
+            liveTime: null,
             name: 'none',
             Init(entity) {
 
             },
-            Update(entity) {
+            LogicUpdate(entity) {
 
+            },
+            Update(entity) {
+                this.LogicUpdate(entity);
+                if (this.liveTime != null)
+                {
+                    if (this.liveTime <= 0)
+                    {
+                        entity.DeleteEffect(this);
+                    }
+                    this.liveTime -= Game.deltaTime;
+                }
             },
             WhenDelete(entity) {
 
@@ -23,18 +35,12 @@ const EffectsBuilder = {
         let effect = this.CreateEmptyEffect();
 
         effect.name = 'damageVisualEffect';
-        effect.liveTime = 10;
+        effect.liveTime = 100;
         effect.damageColor = 'red';
 
         effect.Init = (entity) => {
             effect.entityBaseColor = entity.color;
             entity.color = effect.damageColor;
-            effect.liveTime = Game.lastTime + 50; 
-        }
-
-        effect.Update = (entity) => {
-            if (effect.liveTime <= Game.lastTime)
-                entity.DeleteEffect(effect);
         }
 
         effect.WhenDelete = (entity) => {

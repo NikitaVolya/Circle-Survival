@@ -6,7 +6,7 @@ function createGunWeapon() {
     weapon.name = 'gun';
     weapon.displayKey = 'm1 '
     weapon.keyBind = 'mouseclick';
-    weapon.cooldown = 400;
+    weapon.cooldown = 600;
 
     weapon.bulletSize = 5;
     weapon.bulletSpeed = 0.2;
