@@ -36,7 +36,7 @@ function createBullet(owner, filter, position, direction) {
             case 'entity': case 'player':
                 entity.TakeDamage(object.damage);
                 break;
-            case 'coin':
+            default:
                 return;
         }
         

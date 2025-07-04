@@ -1,29 +1,34 @@
 
-function createExplosion(speed, damage, size) {
+function createExplosion(position) {
     let object = ObjectsBuilder.CreateObject();
 
-    let position = Game.player.body.position.Copy();
+    object.iteration = 0;
 
-    let iteration = 0;
-
-    object.body.position = position;
+    object.name = 'explosion';
+    object.body.position = position.Copy();
     object.color = 'rgba(150, 150, 150, 0.5)';
     object.body.positionAbsolut = true;
     object.body.size = 1;
 
+    object.explosionSize = 180;
+    object.explosionDamage = 4;
+    object.explosionSpeed = 200;
+
+    object.filter = () => { return true; };
+
     object.body.OnCollision = (entity) => {
-        if (entity == Game.player || entity.name != 'entity')
+        if (!object.filter(entity))
             return;
-        entity.TakeDamage(damage * Game.deltaTime / speed);
+        entity.TakeDamage(object.explosionDamage * Game.deltaTime / object.explosionSpeed);
     }
 
     object.LogicUpdate = () => {
         
-        iteration += Game.deltaTime / speed;
+        object.iteration += Game.deltaTime / object.explosionSpeed;
 
-        object.body.size = Math.max(Math.sin(iteration * Math.PI) * size, 0);
+        object.body.size = Math.max(Math.sin(object.iteration * Math.PI) * object.explosionSize, 0);
 
-        if (iteration >= 1)
+        if (object.iteration >= 1)
             Game.entities.Remove(object);
     }
 

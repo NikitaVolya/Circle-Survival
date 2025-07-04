@@ -6,7 +6,11 @@ const ObjectsSpawner = {
     spawnNumber: 1,
     nextSpawn: 0,
 
-    units: [[0.15, createSolder], [0.75, createZombie]],
+    units: [
+        [0.15, createSolder], 
+        [0.75, createZombie],
+        [0.05, createTank]
+    ],
 
     RandomEntityGenerate() {
         let i = 0;

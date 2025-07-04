@@ -15,8 +15,15 @@ function createBombWeapon() {
     weapon.ExplosionDemage = 4;
 
     weapon.Activate = (player) => {
-        Game.entities.Add(createExplosion(weapon.ExplosionSpeed, weapon.ExplosionDemage, weapon.ExplosionSize));
+
+        let explosion = createExplosion(Game.player.body.position);
+
+        explosion.filter = (entity) => {return entity.name == 'entity'; }
+
+        Game.entities.Add(explosion);
     }
+
+
 
     return weapon;
 }

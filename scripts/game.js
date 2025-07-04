@@ -239,8 +239,15 @@ const Game = {
         ui.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
     },
 
-    DrawRectangle(x, y, width, height, color = null) {
+    DrawRectangle(x, y, width, height, color = null, border = 0) {
         this.ctx.beginPath();
+
+        if (border > 0)
+        {
+            this.ctx.rect(x - this.cameraPosition.x - border, y - this.cameraPosition.y - border, width + border * 2, height + border * 2);
+            this.ctx.stroke();
+        }
+
         this.ctx.rect(x - this.cameraPosition.x, y - this.cameraPosition.y, width, height)
         if (color != null)
         {
@@ -251,8 +258,13 @@ const Game = {
         }
     },
 
-    DrawCircle(x, y, radius, color = null) {
+    DrawCircle(x, y, radius, color = null, border = 0) {
         this.ctx.beginPath();
+        if (border > 0)
+        {
+            this.ctx.arc(x - this.cameraPosition.x, y - this.cameraPosition.y, radius + border, 0, 2 * Math.PI);
+            this.ctx.stroke();
+        }
         this.ctx.arc(x - this.cameraPosition.x, y - this.cameraPosition.y, radius, 0, 2 * Math.PI);
         if (color != null)
         {
@@ -261,6 +273,17 @@ const Game = {
         } else {
             this.ctx.stroke();
         }
+    },
+
+    DrawOutlineCircle(x, y, radius, color, border) {
+        this.ctx.beginPath();
+        this.ctx.arc(x - this.cameraPosition.x, y - this.cameraPosition.y, radius, 0, Math.PI * 2);
+
+        this.ctx.lineWidth = border;
+        this.ctx.strokeStyle = color;
+        this.ctx.stroke();
+        this.ctx.lineWidth = 1;
+        this.ctx.strokeStyle = 'black';
     }
 }
 

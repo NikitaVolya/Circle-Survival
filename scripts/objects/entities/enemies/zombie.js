@@ -1,5 +1,5 @@
 
-function createZombie(game) {
+function createZombie() {
 
     let entity = createEntity();
     entity.speed = 0.025;

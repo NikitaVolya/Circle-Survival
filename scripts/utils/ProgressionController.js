@@ -31,6 +31,10 @@ function createCoin(position, experience = 1) {
         }
     }
 
+    object.Draw = () => {
+        Game.DrawCircle(object.body.position.x, object.body.position.y, object.body.size, object.color, 1);
+    }
+
     return object;
 }
 
