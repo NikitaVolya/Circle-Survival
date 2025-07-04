@@ -159,7 +159,7 @@ const UpgradesBuilder = {
         let upgrade = this.createEmptyUpgrade();
 
         upgrade.name = 'Weapon acceleration';
-        upgrade.description = 'Speeds up the recovery rate of all available weapons by 0.1 seconds. This upgrade will not speed up weapons that are obtained afterwards.';
+        upgrade.description = 'Speeds up the recovery rate of all available weapons by 0.1 seconds.';
         upgrade.rarity = Rarities.Epic;
         upgrade.useNumber = 2;
 
@@ -178,7 +178,7 @@ const UpgradesBuilder = {
         let upgrade = this.createEmptyUpgrade();
 
         upgrade.name = 'Weapon acceleration';
-        upgrade.description = 'Speeds up the recovery rate of all available weapons by 30%. This upgrade will not speed up weapons that are obtained afterwards.';
+        upgrade.description = 'Speeds up the recovery rate of all available weapons by 30%.';
         upgrade.rarity = Rarities.Legendary;
         upgrade.useNumber = 1;
 

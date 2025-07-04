@@ -10,6 +10,7 @@ const Game = {
     mouseClick: false,
 
     timers: null,
+    cameraPosition: Vector(0, 0),
 
     AddDelay(f, time) {
         this.timers.Add(TimerBuilder.CreateTimer(f, time));
@@ -119,7 +120,26 @@ const Game = {
         this.DrawWeaponsCooldown();
         this.DrawScore();
     },
+
+    CameraUpdate() {
+        let windowCenter = Vector(window.innerWidth / 2, window.innerHeight / 2);
+        windowCenter.AddVector(this.cameraPosition);
+        let distanceToPlayer = windowCenter.GetDistance(this.player.body.position);
+
+        if (50 < distanceToPlayer)
+        {
+            let cameraMove = windowCenter.GetDirectionTo(this.player.body.position);
+            cameraMove.Multiply(distanceToPlayer * distanceToPlayer / 600);
+            cameraMove.Multiply( 1 /this.deltaTime);
+            this.cameraPosition.AddVector(cameraMove);
+        }
+
+        this.canvas.style.backgroundPosition = `${-this.cameraPosition.x}px ${-this.cameraPosition.y}px`;
+    },
+
     GameUpdate() {
+
+        this.CameraUpdate();
 
         this.entities.UpdateAll();
         this.timers.UpdateAll();
@@ -150,6 +170,7 @@ const Game = {
 
         window.addEventListener("mousemove", e => {
             this.mousePosition = Vector(e.clientX, e.clientY);
+            this.mousePosition.AddVector(this.cameraPosition);
         });
 
         window.addEventListener('mousedown', e => {
@@ -217,6 +238,30 @@ const Game = {
         const ui = document.getElementById('UI');
         ui.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
     },
+
+    DrawRectangle(x, y, width, height, color = null) {
+        this.ctx.beginPath();
+        this.ctx.rect(x - this.cameraPosition.x, y - this.cameraPosition.y, width, height)
+        if (color != null)
+        {
+            this.ctx.fillStyle = color;
+            this.ctx.fill();
+        } else {
+            this.ctx.stroke();
+        }
+    },
+
+    DrawCircle(x, y, radius, color = null) {
+        this.ctx.beginPath();
+        this.ctx.arc(x - this.cameraPosition.x, y - this.cameraPosition.y, radius, 0, 2 * Math.PI);
+        if (color != null)
+        {
+            this.ctx.fillStyle = color;
+            this.ctx.fill();
+        } else {
+            this.ctx.stroke();
+        }
+    }
 }
 
 

@@ -20,10 +20,7 @@ const ObjectsBuilder = {
             },
 
             Draw() {
-                Game.ctx.beginPath();
-                Game.ctx.arc(this.body.position.x, this.body.position.y, this.body.size, 0, 2 * Math.PI);
-                Game.ctx.fillStyle = this.color;
-                Game.ctx.fill();
+                Game.DrawCircle(this.body.position.x, this.body.position.y, this.body.size, this.color);
             }
         }
     },

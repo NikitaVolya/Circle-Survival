@@ -1,6 +1,14 @@
 body {
     margin: 0;
     overflow: hidden;
+
+}
+
+#game {
+    
+    background-image: url('src/backgorund.avif');
+    background-repeat: repeat;
+    background-size: 50%;
 }
 
 canvas {
@@ -15,17 +23,6 @@ canvas {
     gap: 20px;
 }
 
-
-h1 {
-  --color-one: hsl(210 80% 50%);
-  --color-two: hsl(320 100% 75%);
-  --stretch-multiplier: 5;
-  font-size: clamp(2rem, 14vmin, 4rem);
-  font-family: 'Poppins', sans-serif;
-  text-transform: uppercase;
-  display: grid;
-  margin-bottom: 0;
-}
 
 p {
 	--n: 4;
@@ -52,7 +49,6 @@ p {
 }
 
 .UIwindow {
-    
     position: absolute;
     z-index: 10;
     top: 50%;
@@ -64,16 +60,33 @@ p {
 
     display: flex;
     flex-direction: column;
+    align-items: center;
     text-align: center;
+
     background-color: #f9f9f9;
     border-radius: 16px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
     width: min(90vw, 700px);
     padding: 30px 20px;
     gap: 20px;
+
     font-family: 'Poppins', sans-serif;
-    
     transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.UIwindow h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.1;
+}
+
+.UIwindow p {
+    font-size: 1rem;
+    max-width: 600px;
+    line-height: 1.5;
+    margin: 0 auto;
+    color: #444;
 }
 
 .visible {
@@ -99,35 +112,94 @@ p {
 }
 
 .upgrade {
-    flex: 1 1 30%;
-    width: 33.33%;
+    width: 180px;
+    aspect-ratio: 3 / 4;
     border: 2px solid #000;
-    border-radius: 10px;
+    border-radius: 12px;
+    background-color: white;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    background-color: #fff;
+
+    transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.4, 1), box-shadow 0.3s ease;
     cursor: pointer;
+    padding: 10px;
+    box-sizing: border-box;
 }
 
 .upgrade:hover {
-    background-color: #f0f8ff;
-    transform: translateY(-3px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    transform: perspective(600px) rotateX(2deg) rotateY(-2deg) scale(1.05);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
 }
 
-.upgrade h2 {
-    font-size: 1.25rem;
+.upgrade-title-wrapper {
+    height: 32px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 6px;
+}
+
+.upgrade-title {
+    white-space: nowrap;
+    font-weight: bold;
+    font-size: 1rem;
+    text-align: left;
+    width: 100%;
+    color: #111;
+    padding: 0 10px;
+}
+
+.marquee {
+    animation: marquee-scroll 7s linear infinite;
+}
+
+@keyframes marquee-scroll {
+    0% {
+        transform: translateX(0%);
+    }
+    40% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+.upgrade-description {
+    flex-grow: 1;
+    overflow-y: auto;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 6px;
     margin-bottom: 10px;
-    color: #222;
-    text-shadow: none;
+
+    font-size: 0.85rem;
+    line-height: 1.2;
+    scrollbar-width: thin;
+    scrollbar-color: #888 #f0f0f0;
+    max-height: 100px;
 }
 
-.upgrade > p {
-    padding: 5px;
-    font-size: 0.95rem;
-    line-height: 1.3;
+.upgrade-description::-webkit-scrollbar {
+    width: 6px;
+}
+.upgrade-description::-webkit-scrollbar-thumb {
+    background-color: #aaa;
+    border-radius: 4px;
+}
+
+.upgrade-rarity {
+    text-align: center;
+    font-weight: 600;
+    font-size: 0.85rem;
+    margin-top: 8px;
 }
 
 .upgrade.common {
@@ -135,19 +207,36 @@ p {
 }
 
 .upgrade.rare {
-    border-color: blue;
+    border-color: #2979ff;
     background: linear-gradient(to bottom right, #e0f0ff, #ffffff);
 }
 
 .upgrade.epic {
-    border-color: purple;
+    border-color: #9c27b0;
     background: linear-gradient(to bottom right, #f3e0ff, #ffffff);
 }
 
 .upgrade.legendary {
-    border-color: orange;
+    border-color: #ff9800;
     background: linear-gradient(to bottom right, #fff3e0, #ffffff);
 }
+
+.upgrade.common .upgrade-rarity {
+    color: rgb(97, 97, 97);
+}
+
+.upgrade.rare .upgrade-rarity {
+    color: #1565ee;
+}
+
+.upgrade.epic .upgrade-rarity {
+    color: #9c27b0;
+}
+
+.upgrade.legendary .upgrade-rarity {
+    color: #ff9800;
+}
+
 
 .button-30 {
   align-items: center;

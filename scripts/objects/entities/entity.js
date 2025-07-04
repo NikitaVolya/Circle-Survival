@@ -62,22 +62,14 @@ function createEntity() {
         let barsize = object.body.size * 2;
         let livesProc = Math.max(object.heals, 0) / object.maxHeals
 
-        Game.ctx.beginPath();
-        Game.ctx.rect(barPos.x, barPos.y, barsize * livesProc, 10);
-        Game.ctx.fill();
+        Game.DrawRectangle(barPos.x, barPos.y, barsize * livesProc, 10, object.color);
 
-        Game.ctx.beginPath();
-        Game.ctx.rect(barPos.x, barPos.y, barsize * livesProc + 1, 10);
-        Game.ctx.rect(barPos.x, barPos.y, barsize, 10);
-        Game.ctx.stroke();
+        Game.DrawRectangle(barPos.x, barPos.y, barsize * livesProc + 1, 10);
+        Game.DrawRectangle(barPos.x, barPos.y, barsize, 10);
     }
 
     object.Draw = () => {
-        
-        Game.ctx.beginPath();
-        Game.ctx.arc(object.body.position.x, object.body.position.y, object.body.size, 0, 2 * Math.PI);
-        Game.ctx.fillStyle = object.color;
-        Game.ctx.fill();
+        Game.DrawCircle(object.body.position.x, object.body.position.y, object.body.size, object.color)
 
         let rotationPoint = object.body.rotation.Copy();
         rotationPoint.Multiply(object.body.size);
@@ -93,10 +85,7 @@ function createEntity() {
             slide.Multiply(object.body.size);
             fistPosition.AddVector(slide);
 
-            Game.ctx.beginPath();
-            Game.ctx.arc(fistPosition.x, fistPosition.y, object.body.size / 2.5, 0, 2 * Math.PI);
-            Game.ctx.fillStyle = object.color;
-            Game.ctx.fill();
+            Game.DrawCircle(fistPosition.x, fistPosition.y, object.body.size / 2.5, 0, object.color);
         }
 
         object.DrawHealsBar();

@@ -50,9 +50,15 @@ const UpgradesController = {
         cart.classList.add(upgrade.rarity.name);
 
         cart.innerHTML = `
-            <h2>${upgrade.name}</h2>
-            <b>${upgrade.rarity.name}</b>
-            <p>${upgrade.description}</p>
+            <div class="upgrade-title-wrapper">
+                <div class="upgrade-title ${upgrade.name.length > 17 ? 'marquee' : ''}">
+                    ${upgrade.name}
+                </div>
+            </div>
+            <div class="upgrade-description">
+                <p>${upgrade.description}</p>
+            </div>
+            <div class="upgrade-rarity">${upgrade.rarity.name}</div>
         `;
 
         return cart;

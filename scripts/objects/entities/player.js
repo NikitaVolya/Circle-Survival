@@ -35,6 +35,7 @@ function createPlayer() {
 
     entity.name = 'player';
     entity.SetMaxHeals(10);
+    entity.speed = 0.06;
 
     entity.progressionController = createProgressionController();
 

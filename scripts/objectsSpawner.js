@@ -39,6 +39,7 @@ const ObjectsSpawner = {
             else
                 object.body.position.x = window.innerWidth + object.body.size;
         }
+        object.body.position.AddVector(Game.cameraPosition);
     },
 
     Update() {
