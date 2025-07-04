@@ -4,17 +4,23 @@ function CreateObjectsContainer() {
         elements: [],
         toRemove: [],
 
-        UpdateAll() {
+        UpdateAll(updateFunction = null, whenDieFunction = null) {
             for (let i in this.elements)
             {
                 const element = this.elements[i];
-                element.Update();
+                if (updateFunction)
+                    updateFunction(element);
+                else
+                 element.Update();
             }
 
             for (let i in this.toRemove)
             {
                 const element = this.toRemove[i];
-                element.WhenDie();
+                if (whenDieFunction)
+                    whenDieFunction(element);
+                else
+                    element.WhenDie();
             }
 
             this.elements = this.elements.filter(el => !this.toRemove.includes(el));

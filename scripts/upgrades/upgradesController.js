@@ -73,6 +73,7 @@ const UpgradesController = {
 
         Game.HideWindow(upgradeWindow);
         Game.Continue();
+        Game.blockPause = false;
     },
 
     UpgradeDialog() {
@@ -102,5 +103,6 @@ const UpgradesController = {
 
         Game.Pause();
         Game.ShowWindow(upgradeWindow);
+        Game.blockPause = true;
     }
 }

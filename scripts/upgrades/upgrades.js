@@ -67,7 +67,7 @@ const UpgradesBuilder = {
         upgrade.useNumber = 1;
 
         upgrade.Use = () => {
-            Game.player.weapons.push(createBombWeapon());
+            Game.player.weapons.Add(createBombWeapon());
         }
         return upgrade;
     },
@@ -81,11 +81,11 @@ const UpgradesBuilder = {
         upgrade.useNumber = 5;
 
         upgrade.Condition = () => {
-            return Game.player.GetWeapon('bomb') != null;
+            return Game.player.weapons.GetByName('bomb') != null;
         }
 
         upgrade.Use = () => {
-            Game.player.GetWeapon('bomb').ExplosionSize *= 1.05;
+            Game.player.weapons.GetByName('bomb').ExplosionSize *= 1.05;
         }
 
         return upgrade;
@@ -100,11 +100,11 @@ const UpgradesBuilder = {
         upgrade.useNumber = 8;
 
         upgrade.Condition = () => {
-            return Game.player.GetWeapon('bomb') != null;
+            return Game.player.weapons.GetByName('bomb') != null;
         }
 
         upgrade.Use = () => {
-            Game.player.GetWeapon('bomb').ExplosionSize *= 1.1;
+            Game.player.weapons.GetByName('bomb').ExplosionSize *= 1.1;
         }
         return upgrade;
     },
@@ -118,7 +118,7 @@ const UpgradesBuilder = {
         upgrade.useNumber = 1;
 
         upgrade.Use = () => {
-            Game.player.weapons.push(createSatelliteWeapon());
+            Game.player.weapons.Add(createSatelliteWeapon());
         }
         return upgrade;
     },
@@ -131,7 +131,7 @@ const UpgradesBuilder = {
         upgrade.rarity = Rarities.Common;
 
         upgrade.Use = () => {
-            Game.player.GetWeapon('gun').bulletDamage *= 1.05;
+            Game.player.weapons.GetByName('gun').bulletDamage *= 1.05;
         }
         return upgrade;
     },
@@ -142,14 +142,14 @@ const UpgradesBuilder = {
         upgrade.name = 'Gives +1 satellite';
         upgrade.description = 'Adds another spinning satellite to the player\'s injection.';
         upgrade.rarity = Rarities.Rare;
-        upgrade.useNumber = 5;
+        upgrade.useNumber = 9;
 
         upgrade.Condition = () => {
-            return Game.player.GetWeapon('satellite') != null;
+            return Game.player.weapons.GetByName('satellite') != null;
         }
 
         upgrade.Use = () => {
-            Game.player.GetWeapon('satellite').satellitesNumber++;
+            Game.player.weapons.GetByName('satellite').satellitesNumber++;
         }
 
         return upgrade;
@@ -163,13 +163,13 @@ const UpgradesBuilder = {
         upgrade.rarity = Rarities.Epic;
         upgrade.useNumber = 2;
 
-
         upgrade.Use = () => {
-            for (let i in Game.player.weapons)
-            {
-                const weapon = Game.player.weapons[i];
-                weapon.cooldown -= 100;
-            }
+            Game.player.effects.Add(
+                EffectsBuilder.CreateReloadWeaponEffect( (w) => {
+                        w.nextActivate -= 100;
+                        console.log('epic');
+                    })
+            );
         }
 
         return upgrade;
@@ -179,17 +179,20 @@ const UpgradesBuilder = {
         let upgrade = this.createEmptyUpgrade();
 
         upgrade.name = 'Weapon acceleration';
-        upgrade.description = 'Speeds up the recovery rate of all available weapons by 50%. This upgrade will not speed up weapons that are obtained afterwards.';
+        upgrade.description = 'Speeds up the recovery rate of all available weapons by 30%. This upgrade will not speed up weapons that are obtained afterwards.';
         upgrade.rarity = Rarities.Legendary;
         upgrade.useNumber = 1;
 
 
         upgrade.Use = () => {
-            for (let i in Game.player.weapons)
-            {
-                const weapon = Game.player.weapons[i];
-                weapon.cooldown *= 0.5;
-            }
+            
+            Game.player.effects.Add(
+                EffectsBuilder.CreateReloadWeaponEffect( (w) => {
+                        w.nextActivate *= 0.7;
+                        console.log('legendary');
+                    })
+            );
+
         }
 
         return upgrade;

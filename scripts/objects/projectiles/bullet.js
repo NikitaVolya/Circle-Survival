@@ -35,8 +35,9 @@ function createBullet(owner, filter, position, direction) {
                 break;
             case 'entity': case 'player':
                 entity.TakeDamage(object.damage);
-                entity.AddEffect(EffectsBuilder.createDamageVisualEffect());
                 break;
+            case 'coin':
+                return;
         }
         
         Game.entities.Remove(object);

@@ -6,7 +6,7 @@ function createSolder() {
     let entity = createEntity();
 
     entity.speed = 0.01;
-    entity.color = "blue";
+    entity.SetColor('blue');
     entity.distanceToPlayer = 300;
 
     entity.fireCooldown = 1400;

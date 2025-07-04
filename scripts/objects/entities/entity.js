@@ -6,37 +6,18 @@ function createEntity() {
     object.heals = 1;
     object.maxHeals = 1;
     object.name = 'entity';
+    object.baseColor = object.color;
 
-    object.effects = [];
-    object.effectsToDelete = [];
+    object.effects = CreateObjectsContainer();
 
-    object.AddEffect = (effect) => {
-        if (object.effects.find(ef => ef.name == effect.name))
-            return;
-        effect.Init(object);
-        object.effects.push(effect);
-    };
-
-    object.DeleteEffect = (effect) => {
-        if (object.effectsToDelete.indexOf(effect) != -1)
-            return;
-        object.effectsToDelete.push(effect);
+    object.SetColor = (color) => {
+        object.color = color;
+        object.baseColor = color;
     }
 
-    object.UpdateEffects = () => {
-
-        for (let i in object.effects)
-        {
-            let effect = object.effects[i];
-            effect.Update(object);
-        }
-        for (let i in object.effectsToDelete) 
-        {
-            let effect = object.effectsToDelete[i];
-            effect.WhenDelete(object);
-        }   
-
-        object.effects = object.effects.filter(ef => object.effectsToDelete.indexOf(ef) == -1);
+    object.AddEffect = (effect) => {
+        object.effects.Add(effect);
+        effect.Init(object);
     }
 
     object.AddHeals = (number) => {
@@ -63,7 +44,7 @@ function createEntity() {
 
         object.LogicUpdate();
         object.body.Update();
-        object.UpdateEffects();
+        object.effects.UpdateAll(effect => effect.Update(object), effect => effect.WhenDie(object));
 
         if (object.heals <= 0)
         {

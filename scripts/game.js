@@ -19,6 +19,7 @@ const Game = {
     ctx: null,
 
     isWork: false,
+    blockPause: false,
 
     lastTime: 0,
     deltaTime: 0,
@@ -26,6 +27,9 @@ const Game = {
     ShowGameOverWindow() {
         const window = document.getElementById('gameOverWindow');
         const pauseBtn = document.getElementById('pauseButton');
+        
+        this.blockPause = true;
+
         this.HideWindow(pauseBtn);
         this.ShowWindow(window);
     },
@@ -50,10 +54,8 @@ const Game = {
     DrawWeaponsCooldown() {
         
         let slide = 10;
-
-        for (let i in this.player.weapons)
-        {
-            const weapon = this.player.weapons[i];
+        
+        this.player.weapons.ForEach(weapon => {
 
             const nextUse = Math.max(weapon.nextActivate, 0);
             const procent = nextUse / weapon.cooldown;
@@ -76,8 +78,7 @@ const Game = {
             
 
             slide += text.length * 22;
-        }
-
+        });
     },
 
     GameDraw() {
@@ -137,6 +138,8 @@ const Game = {
         const pauseBtn = document.getElementById('pauseButton');
 
         pauseBtn.addEventListener('click', e => {
+            if (this.blockPause)
+                return;
             if (this.isWork)
             {
                 this.Pause();

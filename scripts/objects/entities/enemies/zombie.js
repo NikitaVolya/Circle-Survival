@@ -4,7 +4,7 @@ function createZombie(game) {
     let entity = createEntity();
     entity.speed = 0.025;
     entity.SetMaxHeals(3);
-    entity.color = "green";
+    entity.SetColor("green");
 
     entity.hitCooldown = 1500;
     entity.nextAttack = 0;

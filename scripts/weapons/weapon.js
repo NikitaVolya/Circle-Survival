@@ -12,11 +12,15 @@ function createWeapon() {
 
         },
 
+        Reload(weapon) {
+            weapon.nextActivate = weapon.cooldown;
+        },
+
         Update(player) {
             if (Game.keys[this.keyBind] && this.nextActivate <= 0)
             {
                 this.Activate(player);
-                this.nextActivate = this.cooldown;
+                this.Reload(this);
             }
             this.nextActivate -= Game.deltaTime;
         }

@@ -14,17 +14,20 @@ const EffectsBuilder = {
 
             },
             Update(entity) {
+                if(!entity)
+                    return;
+
                 this.LogicUpdate(entity);
                 if (this.liveTime != null)
                 {
                     if (this.liveTime <= 0)
                     {
-                        entity.DeleteEffect(this);
+                        entity.effects.Remove(this);
                     }
                     this.liveTime -= Game.deltaTime;
                 }
             },
-            WhenDelete(entity) {
+            WhenDie(entity) {
 
             }
         };
@@ -39,14 +42,40 @@ const EffectsBuilder = {
         effect.damageColor = 'red';
 
         effect.Init = (entity) => {
-            effect.entityBaseColor = entity.color;
             entity.color = effect.damageColor;
         }
 
-        effect.WhenDelete = (entity) => {
-            entity.color = effect.entityBaseColor;
+        effect.WhenDie = (entity) => {
+            entity.color = entity.baseColor;
         }
         
+        return effect;
+    },
+
+    CreateReloadWeaponEffect(f) {
+        let effect = this.CreateEmptyEffect();
+
+        effect.name = 'reloadWeaponSpeedEffect';
+        effect.weapons = [];
+
+        effect.LogicUpdate = (entity) => {
+
+            entity.weapons.ForEach(weapon => {
+
+                if (effect.weapons.includes(weapon))
+                    return;
+
+                const reloadMethod = weapon.Reload;
+
+                weapon.Reload = () => {
+                    reloadMethod(weapon);
+                    f(weapon);
+                }
+
+                effect.weapons.push(weapon);
+            });
+        } 
+
         return effect;
     }
 

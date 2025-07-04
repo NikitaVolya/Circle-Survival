@@ -38,23 +38,12 @@ function createPlayer() {
 
     entity.progressionController = createProgressionController();
 
-    entity.weapons = [
-        createGunWeapon(),
-    ];
-
+    entity.weapons = CreateObjectsContainer();
+    entity.weapons.Add(createGunWeapon());
+    
     entity.WhenDie = () => {
         Game.Pause();
         Game.ShowGameOverWindow();
-    }
-
-    entity.GetWeapon = (name) => {
-        for (let i in Game.player.weapons)
-        {
-            const weapon = Game.player.weapons[i];
-            if (weapon.name == name)
-                return weapon;
-        }
-        return null;
     }
 
 
@@ -64,12 +53,7 @@ function createPlayer() {
         PlayerRotation(entity);
         
         entity.progressionController.Update();
-        
-        for (let i in entity.weapons)
-        {
-            const weapon = entity.weapons[i];
-            weapon.Update(entity);
-        }
+        entity.weapons.UpdateAll(w => w.Update(entity), () => {});
     }
 
     return entity;
