@@ -290,6 +290,9 @@ const Game = {
 
 document.addEventListener('DOMContentLoaded', () => {
 
+    if  (document.getElementById('isGame'))
+    {
         Game.Init();
         Game.Start();
+    }
 });

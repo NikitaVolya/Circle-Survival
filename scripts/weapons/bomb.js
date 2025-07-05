@@ -12,11 +12,13 @@ function createBombWeapon() {
 
     weapon.ExplosionSize = 180;
     weapon.ExplosionSpeed = 200;
-    weapon.ExplosionDemage = 4;
+    weapon.ExplosionDemage = 6;
 
     weapon.Activate = (player) => {
 
         let explosion = createExplosion(Game.player.body.position);
+
+        explosion.ExplosionSize = 220;
 
         explosion.filter = (entity) => {return entity.name == 'entity'; }
 

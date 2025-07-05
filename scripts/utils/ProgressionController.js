@@ -66,7 +66,7 @@ function createProgressionController() {
         },
 
         CalculateLevelCost(level) {
-            return 10 + (level / 3) * (level / 2.5) + level / 10;
+            return 10 + (level / 5) * (level / 3.5) + level / 20;
         },
 
         CheckLevelProgression(){
@@ -76,13 +76,32 @@ function createProgressionController() {
                     Rarities.Epic.chance = 0.4;
                     Rarities.Legendary.chance = 0.05;
                     break;
+                case 10:
+                    ObjectsSpawner.units = [
+                        [0.20, createSolder], 
+                        [0.70, createZombie],
+                        [0.02, createTank]
+                    ];
+                    break;
+
                 case 20: 
                     Rarities.Rare.chance = 0.6;
                     Rarities.Epic.chance = 0.35;
                     Rarities.Legendary.chance = 0.1;
+
+                    ObjectsSpawner.units = [
+                        [0.30, createSolder], 
+                        [0.60, createZombie],
+                        [0.05, createTank]
+                    ];
+
+                    
+                    break;
+
                 case 30:
                     Rarities.Epic.chance = 0.6;
                     Rarities.Legendary.chance = 0.4;
+                    break;
             }
         },
 

@@ -5,18 +5,23 @@ function createSolder() {
 
     let entity = createEntity();
 
+    entity.enemyName = 'solder';
+    entity.description = '';
+
     entity.speed = 0.01;
     entity.SetColor('blue');
     entity.distanceToPlayer = 300;
+    entity.expirience = 3;
 
     entity.fireCooldown = 1400;
     entity.nextFire = Game.lastTime + entity.fireCooldown;
 
-    const playerPosition = Game.player.body.position;
     const selfPosition = entity.body.position;
 
-
     entity.SolderMove = () => {
+        
+        const playerPosition = Game.player.body.position;
+
         let vectorToPlayer = selfPosition.GetVectorTo(playerPosition);
 
         if (vectorToPlayer.Length() < 10)
@@ -37,6 +42,10 @@ function createSolder() {
     }
 
     entity.FireUpdate = () => {
+
+        
+        const playerPosition = Game.player.body.position;
+
         if (entity.nextFire < Game.lastTime)
         {
             let direction = selfPosition.GetDirectionTo(playerPosition);
@@ -55,8 +64,10 @@ function createSolder() {
     }
 
     entity.WhenDie = () => {
-        Game.entities.Add(createCoin(entity.body.position, 3));
-        Game.score += 2;
+        const coin = createCoin(entity.body.position, entity.expirience);
+        coin.experience = entity.expirience;
+        Game.entities.Add(coin);
+        Game.score += entity.expirience;
     }
 
     entity.LogicUpdate = () => {

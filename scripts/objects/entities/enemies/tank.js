@@ -2,9 +2,14 @@
 function createTank() {
 
     let entity = createEntity();
+    
+    entity.enemyName = 'tank';
+    entity.description = '';
+
     entity.speed = 0.02;
-    entity.SetMaxHeals(40);
+    entity.SetMaxHeals(20);
     entity.SetColor("orange");
+    entity.expirience = 30;
 
     entity.hitCooldown = 2000;
     entity.nexHitAttack = 0;
@@ -14,14 +19,13 @@ function createTank() {
 
     entity.body.size = 40;
     
-    const playerPosition = Game.player.body.position;
     const selfPosition = entity.body.position;
 
     entity.WhenDie = () => {
         const coin = createCoin(entity.body.position);
-        coin.experience = 10;
+        coin.experience = entity.expirience;
         Game.entities.Add(coin);
-        Game.score += 10;
+        Game.score += entity.expirience;
     };
 
     entity.body.OnCollision = (otherEntity) => {
@@ -45,7 +49,7 @@ function createTank() {
             wave.color = 'rgba(150, 150, 150, 0.2)';
 
             wave.isActive = false;
-            wave.activateCooldown = 700;
+            wave.activateCooldown = 1000;
             wave.explosionSize = window.innerWidth * 1.5;  
             wave.explosionSpeed = 6000;
             wave.explosionDamage = 80;
@@ -90,7 +94,6 @@ function createTank() {
                 }
             }
 
-
             Game.entities.Add(wave);
 
             entity.nextWaveAttack = entity.waveCooldown;
@@ -99,6 +102,8 @@ function createTank() {
     }
 
     entity.LogicUpdate = () => {
+
+        const playerPosition = Game.player.body.position;
 
         if (entity.nexHitAttack > 0)
             entity.nexHitAttack -= Game.deltaTime;

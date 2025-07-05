@@ -2,19 +2,26 @@
 function createZombie() {
 
     let entity = createEntity();
+
+    entity.enemyName = 'zombie';
+    entity.description = '';
+
+
     entity.speed = 0.025;
     entity.SetMaxHeals(3);
     entity.SetColor("green");
+    entity.expirience = 1;
 
     entity.hitCooldown = 1500;
     entity.nextAttack = 0;
     
-    const playerPosition = Game.player.body.position;
     const selfPosition = entity.body.position;
 
     entity.WhenDie = () => {
-        Game.entities.Add(createCoin(entity.body.position));
-        Game.score++;
+        const coin = createCoin(entity.body.position);
+        coin.experience = entity.expirience;
+        Game.entities.Add(coin);
+        Game.score += entity.expirience;
     }
 
     entity.body.OnCollision = (otherEntity) => {
@@ -30,7 +37,7 @@ function createZombie() {
 
     entity.LogicUpdate = () => {
 
-        let direction = selfPosition.GetDirectionTo(playerPosition);
+        let direction = selfPosition.GetDirectionTo( Game.player.body.position);
         entity.body.rotation = direction.Copy();
         direction.Multiply(entity.speed);
 

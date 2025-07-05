@@ -9,7 +9,7 @@ const ObjectsSpawner = {
     units: [
         [0.15, createSolder], 
         [0.75, createZombie],
-        [0.05, createTank]
+        [0.00, createTank]
     ],
 
     RandomEntityGenerate() {
