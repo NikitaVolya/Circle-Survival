@@ -18,7 +18,8 @@ function createTank() {
     entity.nexHitAttack = 0;
 
     entity.waveCooldown = 10000;
-    entity.nextWaveAttack = 1000;
+    entity.nextWaveAttack = 15000;
+    entity.waveDuration = 6000;
 
     entity.body.size = 40;
     
@@ -54,7 +55,8 @@ function createTank() {
             wave.isActive = false;
             wave.activateCooldown = 1000;
             wave.explosionSize = window.innerWidth * 1.5;  
-            wave.explosionDuration = 6000;
+            wave.explosionDuration = entity.waveDuration;
+
             wave.explosionDamage = 80;
 
             wave.Draw = () => {
@@ -68,20 +70,9 @@ function createTank() {
                 );
             }
 
-            wave.body.OnCollision = (entity) => {
-                if (!wave.filter(entity))
-                    return;
-                let distance = entity.body.position.GetDistance(wave.body.position);
-                if (distance < wave.body.size - wave.waveSize)
-                    return;
-                if (!wave.isActive)
-                    return;
-                entity.TakeDamage(wave.explosionDamage * Game.deltaTime / wave.explosionSpeed);
-            }
-
             wave.LogicUpdate = () => {
         
-                wave.iteration += Game.deltaTime / wave.explosionSpeed;
+                wave.iteration += Game.deltaTime / wave.explosionDuration;
 
                 wave.body.size = Math.max(Math.sin(wave.iteration * Math.PI / 2) * wave.explosionSize, 0);
 
@@ -89,6 +80,7 @@ function createTank() {
                     Game.entities.Remove(wave);
                 if (wave.isActive)
                     return;
+                
                 if (wave.activateCooldown > 0) {
                     wave.activateCooldown -= Game.deltaTime;
                 } else {

@@ -76,10 +76,17 @@ function loadEnemies() {
 
     enemieList.innerHTML = '';
 
+
     for (let i in ObjectsSpawner.units)
     {
         const [chance, enemySpawner] = ObjectsSpawner.units[i];
-        loadEnemy(enemieList, enemySpawner());
+        const enemy = enemySpawner();
+
+        
+        enemy.waveCooldown = 3000;
+        enemy.nextWaveAttack = 0;
+
+        loadEnemy(enemieList, enemy);
     }
 
     loadEnemy(enemieList);
