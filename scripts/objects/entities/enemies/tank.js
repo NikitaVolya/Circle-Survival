@@ -70,6 +70,23 @@ function createTank() {
                 );
             }
 
+            wave.body.OnCollision = (entity) => {
+                if (!entity)
+                    return;
+
+                if (!wave.filter(entity))
+                    return;
+                let distance = entity.body.position.GetDistance(wave.body.position);
+                if (distance < wave.body.size - wave.waveSize)
+                    return;
+
+                if (!wave.isActive)
+                    return;
+                entity.TakeDamage(wave.explosionDamage * Game.deltaTime / wave.explosionDuration);
+
+
+            }
+
             wave.LogicUpdate = () => {
         
                 wave.iteration += Game.deltaTime / wave.explosionDuration;
