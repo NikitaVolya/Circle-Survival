@@ -45,15 +45,30 @@ const UpgradesBuilder = {
         return upgrade;
     },
 
+    createMovementSpeedUpgrade() {
+        let upgrade = this.createEmptyUpgrade();
+
+        upgrade.name = 'Movement speed upgrade';
+        upgrade.description = 'Increase movement speed by 5%';
+        upgrade.rarity = Rarities.Common;
+        upgrade.useNumber = 4;
+
+        upgrade.Use = () => {
+            Game.player.speed *= 1.05;
+
+        }
+        return upgrade;
+    },
+
     createHealtRecoverUpgrade() {
         let upgrade = this.createEmptyUpgrade();
 
         upgrade.name = 'Health recover';
-        upgrade.description = 'Recover 30% of your health';
+        upgrade.description = 'Recover 50% of your health';
         upgrade.rarity = Rarities.Common;
 
         upgrade.Use = () => {
-            Game.player.AddHeals(Game.player.maxHeals * 0.3);
+            Game.player.AddHeals(Game.player.maxHeals * 0.5);
         }
         return upgrade;
     },
@@ -190,6 +205,95 @@ const UpgradesBuilder = {
                         w.nextActivate *= 0.7;
                     })
             );
+
+        }
+
+        return upgrade;
+    },
+
+    createLegendaryExperienceUpgrade() {
+        let upgrade = this.createEmptyUpgrade();
+        upgrade.name = 'Experience upgrade';
+        upgrade.description = 'Grants +300% experience, but also increases incoming damage by 200%.';
+        upgrade.rarity = Rarities.Legendary;
+        upgrade.useNumber = 1;
+
+        upgrade.Use = () => {
+            
+            Game.player.progressionController.AddExperienceMultiple(3);
+
+            Game.player.baseTakeDamage = Game.player.TakeDamage;
+
+            Game.player.TakeDamage = (number) => {
+                Game.player.baseTakeDamage(number * 2);
+            };
+
+        }
+
+        return upgrade;
+    },
+
+    createEpicExperienceUpgrade() {
+        let upgrade = this.createEmptyUpgrade();
+        upgrade.name = 'Experience upgrade';
+        upgrade.description = 'Grants +50% experience.';
+        upgrade.rarity = Rarities.Epic;
+        upgrade.useNumber = 2;
+
+        upgrade.Use = () => {
+            Game.player.progressionController.AddExperienceMultiple(0.5);
+        }
+
+        return upgrade;
+    },
+
+    createRareExperienceUpgrade() {
+        let upgrade = this.createEmptyUpgrade();
+        upgrade.name = 'Experience upgrade';
+        upgrade.description = 'Grants +10% experience.';
+        upgrade.rarity = Rarities.Rare;
+        upgrade.useNumber = 10;
+
+        upgrade.Use = () => {
+            Game.player.progressionController.AddExperienceMultiple(0.1);
+        }
+
+        return upgrade;
+    },
+
+    createGunExplosionupgrade() {
+        let upgrade = this.createEmptyUpgrade();
+        upgrade.name = 'Bullet explosion';
+        upgrade.description = 'Now after the bullet disappears, explosions will appear. Explosions damage depends on the damage of the bullet.';
+        upgrade.rarity = Rarities.Epic;
+        upgrade.useNumber = 10;
+
+        upgrade.Use = () => {
+            
+            const gun = Game.player.weapons.GetByName('gun');
+
+            const oldBulletEnhancement = gun.BulletEnhancement.bind(gun);
+
+            gun.BulletEnhancement = (bullet) => {
+
+                const oldWhenDie = bullet.WhenDie.bind(bullet);
+
+
+                bullet.WhenDie = ()  => {
+                    const explosion = createExplosion(bullet.body.position);
+                    explosion.filter = (entity) => {return entity.name == 'entity'; }
+
+                    
+                    explosion.explosionSize = 100;
+                    explosion.explosionDamage = gun.bulletDamage / 2;
+                    explosion.explosionDuration = 200;
+
+                    Game.entities.Add(explosion);
+                    oldWhenDie();
+                }
+
+                return oldBulletEnhancement(bullet);
+            }
 
         }
 

@@ -43,6 +43,7 @@ function createProgressionController() {
         level: 0,
         experience: 0,
         levelCost: 10,
+        experienceM: 1,
 
         DrawExperienceBar() {
 
@@ -75,12 +76,19 @@ function createProgressionController() {
                 case 5:
                     Rarities.Epic.chance = 0.4;
                     Rarities.Legendary.chance = 0.05;
+                    ObjectsSpawner.units = [
+                        [0.7, createZombie],
+                        [0.2, createSpeedster],
+                        [0.5, createSolder], 
+                        [0, createTank],
+                    ];
                     break;
                 case 10:
                     ObjectsSpawner.units = [
-                        [0.20, createSolder], 
-                        [0.70, createZombie],
-                        [0.02, createTank]
+                        [0.7, createZombie],
+                        [0.3, createSpeedster],
+                        [0.5, createSolder], 
+                        [0.1, createTank],
                     ];
                     break;
 
@@ -90,12 +98,11 @@ function createProgressionController() {
                     Rarities.Legendary.chance = 0.1;
 
                     ObjectsSpawner.units = [
-                        [0.30, createSolder], 
-                        [0.60, createZombie],
-                        [0.05, createTank]
+                        [0.7, createZombie],
+                        [0.35, createSpeedster],
+                        [0.5, createSolder], 
+                        [0.2, createTank],
                     ];
-
-                    
                     break;
 
                 case 30:
@@ -117,9 +124,12 @@ function createProgressionController() {
             }
         },
 
-        AddExperience(number) {
+        AddExperienceMultiple(number) {
+            this.experienceM += number;
+        },
 
-            this.experience += number;
+        AddExperience(number) {
+            this.experience += number * this.experienceM;
         }
     }
 }

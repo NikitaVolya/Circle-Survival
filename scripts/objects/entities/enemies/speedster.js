@@ -1,18 +1,19 @@
 
-function createZombie() {
+function createSpeedster() {
 
     let entity = createEntity();
 
-    entity.enemyName = 'zombie';
-    entity.description = 'Zombie — a common enemy that slowly approaches the player and attacks in close combat.';
+    entity.enemyName = 'speedster';
+    entity.description = 'Speedster — small, fast, and annoyingly persistent.';
 
 
-    entity.speed = 0.025;
-    entity.SetMaxHeals(3);
-    entity.SetColor("green");
-    entity.expirience = 1;
+    entity.speed = 0.08;
+    entity.SetMaxHeals(2);
+    entity.SetColor("purple");
+    entity.body.size = 13;
+    entity.expirience = 2;
 
-    entity.hitCooldown = 1500;
+    entity.hitCooldown = 200;
     entity.nextAttack = 0;
     
     const selfPosition = entity.body.position;

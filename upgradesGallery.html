@@ -5,11 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Upgrades</title>
     <link rel="stylesheet" href="style.css">
-    <script src="scripts/upgrades/upgradesGallery.js"></script>
+
+    <script src="scripts/upgrades/upgrades.js"></script>
     <script src="scripts/upgrades/upgradesController.js"></script>
-    <script src="scripts/gallery.js"></script>
+    
+    <script src="scripts/upgradesGallery.js"></script>
 </head>
-<body>
+<body style="overflow:scroll;">
     <header>
         <div class="title">Upgrade Gallery</div>
         <div class="filters">
@@ -19,11 +21,10 @@
         </select>
 
         <select id="sort">
-            <option value="">Sorting</option>
+            <option value="rarity-asc" selected>Sort by rarity</option>
+            <option value="rarity-desc">Sort by rarity reverse</option>
             <option value="asc">Sort by Name (A-Z)</option>
             <option value="desc">Sort by Name (Z-A)</option>
-            <option value="rarity-asc">Sort by rarity</option>
-            <option value="rarity-desc">Sort by rarity reverse</option>
         </select>
         </div>
         <button class="back-btn" id="backButton">← Back</button>

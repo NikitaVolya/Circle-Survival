@@ -1,7 +1,4 @@
 
-const Player = {
-    
-}
 
 function PlayerMovment(player) {
     const moveVector = Vector(0, 0);

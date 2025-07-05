@@ -12,19 +12,19 @@ function createExplosion(position) {
 
     object.explosionSize = 180;
     object.explosionDamage = 4;
-    object.explosionSpeed = 200;
+    object.explosionDuration = 200;
 
-    object.filter = () => { return true; };
+    object.filter = (entity) => { return entity.name == 'entity' || entity.name == 'player'; };
 
     object.body.OnCollision = (entity) => {
         if (!object.filter(entity))
             return;
-        entity.TakeDamage(object.explosionDamage * Game.deltaTime / object.explosionSpeed);
+        entity.TakeDamage(object.explosionDamage * Game.deltaTime / object.explosionDuration);
     }
 
     object.LogicUpdate = () => {
         
-        object.iteration += Game.deltaTime / object.explosionSpeed;
+        object.iteration += Game.deltaTime / object.explosionDuration;
 
         object.body.size = Math.max(Math.sin(object.iteration * Math.PI) * object.explosionSize, 0);
 

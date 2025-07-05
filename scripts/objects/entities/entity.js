@@ -30,7 +30,6 @@ function createEntity() {
     }
 
     object.TakeDamage = (number) => {
-        
         object.heals -= number;
         object.AddEffect(EffectsBuilder.createDamageVisualEffect());
     }

@@ -4,7 +4,10 @@ function createTank() {
     let entity = createEntity();
     
     entity.enemyName = 'tank';
-    entity.description = '';
+    entity.description = 'Tank — a special enemy that appears rarely but poses a significant threat to the player. ' + 
+    'It has a large health pool and grants a high reward upon defeat. <br><br>' +
+    'The tank slowly approaches the player but stops when within a certain range. If the player gets too close, it deals melee damage.  <br><br>' +
+    'Periodically, it releases a damaging shockwave around itself — the only safe zone is right next to the tank\'s body.  <br>';
 
     entity.speed = 0.02;
     entity.SetMaxHeals(20);
@@ -51,7 +54,7 @@ function createTank() {
             wave.isActive = false;
             wave.activateCooldown = 1000;
             wave.explosionSize = window.innerWidth * 1.5;  
-            wave.explosionSpeed = 6000;
+            wave.explosionDuration = 6000;
             wave.explosionDamage = 80;
 
             wave.Draw = () => {

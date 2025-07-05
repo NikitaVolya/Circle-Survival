@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
     rarityFilter.value = "";
 
     const sortingSelector = document.getElementById('sort');
-    sortingSelector.value = "";
+    sortingSelector.value = "rarity-asc";
 
     rarityFilter.addEventListener('change', renderCarts);
     sortingSelector.addEventListener('change', renderCarts);

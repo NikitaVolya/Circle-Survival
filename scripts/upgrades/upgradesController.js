@@ -13,6 +13,11 @@ const UpgradesController = {
         UpgradesBuilder.createSatelliteNumberUpgrade(),
         UpgradesBuilder.createWeaponsSpeedUpgrade(),
         UpgradesBuilder.createLegendaryWeaponsSpeedUpgrade(),
+        UpgradesBuilder.createEpicExperienceUpgrade(),
+        UpgradesBuilder.createGunExplosionupgrade(),
+        UpgradesBuilder.createRareExperienceUpgrade(),
+        UpgradesBuilder.createLegendaryExperienceUpgrade(),
+        UpgradesBuilder.createMovementSpeedUpgrade()
     ],
 
     DeleteUpgrade(upgrade) {

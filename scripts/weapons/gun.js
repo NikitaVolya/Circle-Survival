@@ -12,6 +12,7 @@ function createGunWeapon() {
     weapon.bulletSpeed = 0.2;
     weapon.bulletDamage = 1;
 
+    weapon.BulletEnhancement = (bullet) => { return bullet; };
 
     weapon.Activate = (player) => {
         let position = player.body.position.Copy();
@@ -24,6 +25,8 @@ function createGunWeapon() {
         newProjectile.speed = weapon.bulletSpeed;
         newProjectile.body.size = weapon.bulletSize;
         newProjectile.damage = weapon.bulletDamage;
+
+        newProjectile = weapon.BulletEnhancement(newProjectile);
 
         Game.entities.Add(newProjectile);
     }

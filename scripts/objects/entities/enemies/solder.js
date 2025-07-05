@@ -6,7 +6,7 @@ function createSolder() {
     let entity = createEntity();
 
     entity.enemyName = 'solder';
-    entity.description = '';
+    entity.description = 'Soldier — a common enemy that slowly approaches the player and stops once within range. He continuously showers the player with bullets, which can either be dodged or destroyed using your own projectiles.';
 
     entity.speed = 0.01;
     entity.SetColor('blue');
