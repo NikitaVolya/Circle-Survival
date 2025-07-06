@@ -1,13 +1,15 @@
 
 function createCoin(position, experience = 1) {
+
     let object = ObjectsBuilder.CreateObject();
 
     object.name = 'coin';
-    object.experience = experience;
     object.color = 'yellow';
-    object.body.position = position.Copy();
+    object.experience = experience;
+
     object.body.size = 7;
     object.body.positionAbsolut = true;
+    object.body.position = position.Copy();
 
     object.body.OnCollision = (entity) => {
         if (Game.player != entity)
@@ -67,7 +69,7 @@ function createProgressionController() {
         },
 
         CalculateLevelCost(level) {
-            return 10 + (level / 5) * (level / 3.5) + level / 20;
+            return 10 + (level / 5) * (level / 2.5) + level / 20;
         },
 
         CheckLevelProgression(){
@@ -76,6 +78,7 @@ function createProgressionController() {
                 case 5:
                     Rarities.Epic.chance = 0.4;
                     Rarities.Legendary.chance = 0.05;
+                    
                     ObjectsSpawner.units = [
                         [0.7, createZombie],
                         [0.2, createSpeedster],

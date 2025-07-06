@@ -5,11 +5,13 @@ function createExplosion(position) {
     object.iteration = 0;
 
     object.name = 'explosion';
+
     object.body.position = position.Copy();
     object.color = 'rgba(150, 150, 150, 0.5)';
-    object.body.positionAbsolut = true;
-    object.body.size = 1;
 
+    object.body.positionAbsolut = true;
+
+    object.body.size = 1;
     object.explosionSize = 180;
     object.explosionDamage = 4;
     object.explosionDuration = 200;
@@ -17,8 +19,7 @@ function createExplosion(position) {
     object.filter = (entity) => { return entity.name == 'entity' || entity.name == 'player'; };
 
     object.body.OnCollision = (entity) => {
-        if (!object.filter(entity))
-            return;
+        if (!object.filter(entity)) return;
         entity.TakeDamage(object.explosionDamage * Game.deltaTime / object.explosionDuration);
     }
 

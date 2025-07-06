@@ -238,7 +238,7 @@ const UpgradesBuilder = {
         upgrade.name = 'Experience upgrade';
         upgrade.description = 'Grants +50% experience.';
         upgrade.rarity = Rarities.Epic;
-        upgrade.useNumber = 2;
+        upgrade.useNumber = 1;
 
         upgrade.Use = () => {
             Game.player.progressionController.AddExperienceMultiple(0.5);
@@ -252,7 +252,7 @@ const UpgradesBuilder = {
         upgrade.name = 'Experience upgrade';
         upgrade.description = 'Grants +10% experience.';
         upgrade.rarity = Rarities.Rare;
-        upgrade.useNumber = 10;
+        upgrade.useNumber = 3;
 
         upgrade.Use = () => {
             Game.player.progressionController.AddExperienceMultiple(0.1);
@@ -266,19 +266,16 @@ const UpgradesBuilder = {
         upgrade.name = 'Bullet explosion';
         upgrade.description = 'Now after the bullet disappears, explosions will appear. Explosions damage depends on the damage of the bullet.';
         upgrade.rarity = Rarities.Epic;
-        upgrade.useNumber = 10;
+        upgrade.useNumber = 1;
 
         upgrade.Use = () => {
             
             const gun = Game.player.weapons.GetByName('gun');
 
             const oldBulletEnhancement = gun.BulletEnhancement.bind(gun);
-
             gun.BulletEnhancement = (bullet) => {
 
                 const oldWhenDie = bullet.WhenDie.bind(bullet);
-
-
                 bullet.WhenDie = ()  => {
                     const explosion = createExplosion(bullet.body.position);
                     explosion.filter = (entity) => {return entity.name == 'entity'; }

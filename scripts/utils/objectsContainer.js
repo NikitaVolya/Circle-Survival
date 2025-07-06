@@ -36,11 +36,11 @@ function CreateObjectsContainer() {
             }
         },
 
-        ForEach(f) {
+        ForEach(func) {
             for (let i in this.elements)
             {
                 const element = this.elements[i];
-                f(element);
+                func(element);
             }
         },
 

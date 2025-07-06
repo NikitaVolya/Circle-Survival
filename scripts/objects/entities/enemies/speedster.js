@@ -19,8 +19,8 @@ function createSpeedster() {
     const selfPosition = entity.body.position;
 
     entity.WhenDie = () => {
-        const coin = createCoin(entity.body.position);
-        coin.experience = entity.expirience;
+        const coin = createCoin(entity.body.position, entity.expirience);
+        
         Game.entities.Add(coin);
         Game.score += entity.expirience;
     }

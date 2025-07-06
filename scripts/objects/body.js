@@ -1,7 +1,7 @@
 
 function createBody(position, size) {
     return {
-        position: position,
+        position: position.Copy(),
         rotation: GetVectorByAngle(0),
         velocity: Vector(0, 0),
         size: size,

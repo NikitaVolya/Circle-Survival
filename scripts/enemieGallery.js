@@ -3,10 +3,6 @@ const listItems = [];
 
 function loadEnemy(list, enemy) {
 
-    
-    if (!enemy)
-        return;
-
     const card = document.createElement("div");
     card.className = "enemy-card";
 
@@ -20,16 +16,16 @@ function loadEnemy(list, enemy) {
       </div>
       <div class="enemy-description">${enemy.description}</div>
     `;
+    card.appendChild(info);
 
     const canvas = document.createElement("canvas");
     canvas.className = "enemy-canvas";
     canvas.width = 400;
     canvas.height = 300;
+    card.appendChild(canvas);
+
 
     const ctx = canvas.getContext("2d");
-
-    card.appendChild(info);
-    card.appendChild(canvas);
 
     list.appendChild(card);
 
@@ -88,8 +84,6 @@ function loadEnemies() {
 
         loadEnemy(enemieList, enemy);
     }
-
-    loadEnemy(enemieList);
 }
 
 document.addEventListener('DOMContentLoaded', () => {

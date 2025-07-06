@@ -12,7 +12,7 @@ function createBombWeapon() {
 
     weapon.Activate = (player) => {
 
-        let explosion = createExplosion(Game.player.body.position);
+        let explosion = createExplosion(player.body.position);
 
         explosion.ExplosionSize = 220;
 

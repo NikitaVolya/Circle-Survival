@@ -12,7 +12,7 @@ function createBullet(owner, filter, position, direction) {
 
     object.body.speed = 1;
     object.body.size = 5;
-    object.body.position = position;
+    object.body.position = position.Copy();
     object.damage = 1;
     object.body.direction = direction;
     object.body.positionAbsolut = true;

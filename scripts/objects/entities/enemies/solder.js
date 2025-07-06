@@ -14,7 +14,7 @@ function createSolder() {
     entity.expirience = 3;
 
     entity.fireCooldown = 1400;
-    entity.nextFire = Game.lastTime + entity.fireCooldown;
+    entity.nextFire = 0;
 
     const selfPosition = entity.body.position;
 
@@ -46,11 +46,11 @@ function createSolder() {
         
         const playerPosition = Game.player.body.position;
 
-        if (entity.nextFire < Game.lastTime)
+        if (entity.nextFire <= 0)
         {
             let direction = selfPosition.GetDirectionTo(playerPosition);
             
-            let newProjectile = createBullet(entity, (e) => e == Game.player, selfPosition.Copy(), direction);
+            let newProjectile = createBullet(entity, (e) => e == Game.player, selfPosition, direction);
             newProjectile.speed = 0.05;
             newProjectile.body.size = 10;
             newProjectile.color = 'red';
@@ -59,13 +59,14 @@ function createSolder() {
 
             Game.entities.Add(newProjectile);
 
-            entity.nextFire = Game.lastTime + entity.fireCooldown * (0.6 + Math.random());
+            entity.nextFire = entity.fireCooldown * (0.6 + Math.random());
         }
+        entity.nextFire -=  Game.deltaTime;
     }
 
     entity.WhenDie = () => {
         const coin = createCoin(entity.body.position, entity.expirience);
-        coin.experience = entity.expirience;
+        
         Game.entities.Add(coin);
         Game.score += entity.expirience;
     }
